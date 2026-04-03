@@ -1,0 +1,61 @@
+services:
+  db:
+    image: mariadb:latest
+    container_name: pca_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-rootpassword}
+      MYSQL_DATABASE: ${DB_NAME:-pca_db}
+      MYSQL_USER: ${DB_USER:-pca_user}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-pca_password}
+    # DB port intentionally NOT exposed outside the container network
+    # Only the backend service (same pca_network) can reach port 3306
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - pca_network
+
+  backend:
+    build: ./backend
+    container_name: pca_backend
+    restart: always
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: ${DB_NAME:-pca_db}
+      DB_USER: ${DB_USER:-pca_user}
+      DB_PASSWORD: ${DB_PASSWORD:-pca_password}
+      FLASK_ENV: ${FLASK_ENV:-development}
+      JWT_SECRET: ${JWT_SECRET:-pca-jwt-secret-change-in-prod}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-pca}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3000}
+    ports:
+      - "5001:5000"
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - db
+    networks:
+      - pca_network
+
+  frontend:
+    build: ./frontend
+    container_name: pca_frontend
+    restart: always
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+    networks:
+      - pca_network
+
+volumes:
+  db_data:
+
+networks:
+  pca_network:
+    driver: bridge

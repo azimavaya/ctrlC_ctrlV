@@ -1,0 +1,1 @@
+# Services package — business logic for timetable generation, simulation, and auth.

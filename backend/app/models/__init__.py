@@ -1,0 +1,1 @@
+# Models package — DB access is handled directly via mysql.connector in route handlers.

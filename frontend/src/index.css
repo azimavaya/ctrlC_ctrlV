@@ -1,0 +1,67 @@
+/* ══════════════════════════════════════════════
+   index.css — CSS custom properties (design tokens),
+   dark/light theme variables, and global resets.
+   ══════════════════════════════════════════════ */
+
+/* ── Light-mode design tokens (default) ── */
+:root {
+  --pca-blue:    #1a3a5c;
+  --pca-gold:    #c9a84c;
+  --pca-light:   #f4f7fb;
+  --pca-white:   #ffffff;
+  --pca-gray:    #6b7280;
+  --pca-border:  #e2e8f0;
+  --radius:      8px;
+  --shadow:      0 2px 12px rgba(0,0,0,0.08);
+  --font:        'Segoe UI', system-ui, sans-serif;
+}
+
+/* ── Dark mode overrides ── */
+:root[data-theme="dark"] {
+  --pca-blue:    #1e3d5f;
+  --pca-gold:    #d4b050;
+  --pca-light:   #0f1419;
+  --pca-white:   #1a2332;
+  --pca-gray:    #9ca3af;
+  --pca-border:  #2d3748;
+  --shadow:      0 2px 12px rgba(0,0,0,0.3);
+  --pca-text:    #e5e7eb;
+  --pca-text-secondary: #9ca3af;
+  --pca-card-bg: #1a2332;
+  --pca-hover:   #232d3b;
+  --pca-table-header: #1e293b;
+  --pca-table-stripe: #151c28;
+  --pca-table-hover: #1e2a3a;
+}
+
+:root[data-theme="light"] {
+  --pca-text:    #1f2937;
+  --pca-text-secondary: #6b7280;
+  --pca-card-bg: #ffffff;
+  --pca-hover:   #eef3ff;
+  --pca-table-header: #f1f5f9;
+  --pca-table-stripe: #fafbfd;
+  --pca-table-hover: #eef3ff;
+}
+
+/* ── Global box-sizing reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── Base body styles ── */
+body {
+  font-family: var(--font);
+  background: var(--pca-light);
+  color: var(--pca-text);
+  line-height: 1.6;
+}
+
+/* ── Link and button defaults ── */
+a { color: var(--pca-blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+[data-theme="dark"] a { color: #60a5fa; }
+
+button {
+  cursor: pointer;
+  font-family: var(--font);
+}
