@@ -23,8 +23,8 @@ start: ## Start all services (frontend, backend, database)
 	docker compose up -d
 	@echo "==> PCA is running:"
 	@echo "    Frontend : http://localhost:3000"
-	@echo "    Backend  : http://localhost:5000/api/health"
-	@echo "    Database : localhost:3306"
+	@echo "    Backend  : http://localhost:5001/api/health"
+	@echo "    Database : internal (Docker network only)"
 
 stop: ## Stop all services
 	docker compose down
@@ -72,7 +72,7 @@ simulate: ## Run the 14-day simulation (Part 2)
 	cd backend && python -m app.services.simulation
 
 report: ## Print the financial report
-	@curl -s http://localhost:5000/api/simulation/report | python3 -m json.tool
+	@curl -s http://localhost:5001/api/simulation/report | python3 -m json.tool
 
 ## ── Utilities ────────────────────────────────────────────────────────
 

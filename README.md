@@ -27,6 +27,37 @@ Airline simulation system for Panther Cloud Air — 56 aircraft, 310 daily fligh
 - **Python 3.12+**
 - **Git**
 
+### Installing prerequisites on Ubuntu/Debian (including WSL2)
+
+**Git:**
+```bash
+sudo apt update && sudo apt install -y git
+```
+
+**Docker Engine + Docker Compose:**
+```bash
+# Install Docker using the official convenience script
+curl -fsSL https://get.docker.com | sudo sh
+# Add your user to the docker group (avoids needing sudo for docker commands)
+sudo usermod -aG docker $USER
+# Log out and back in (or run: newgrp docker) for the group change to take effect
+```
+
+**Node.js 20+ (via NodeSource):**
+```bash
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt install -y nodejs
+```
+
+**Python 3.12+:**
+```bash
+sudo apt install -y python3 python3-pip python3-venv
+# Verify version (must be 3.12 or higher):
+python3 --version
+```
+
+> **Windows 11 (WSL2) users:** Install [WSL2](https://learn.microsoft.com/en-us/windows/wsl/install) first (`wsl --install` in PowerShell), then follow the Linux instructions above inside your WSL terminal. Install [Docker Desktop for Windows](https://docs.docker.com/desktop/install/windows-install/) and enable the WSL2 backend, or install Docker Engine directly inside WSL as shown above.
+
 ### 1. Clone the repo
 ```bash
 git clone https://github.com/AlexJohnWilcox/pca.git
@@ -34,7 +65,7 @@ cd pca
 ```
 
 ### 2. Start the Docker daemon
-Make sure Docker is running before proceeding. On Linux:
+Make sure Docker is running before proceeding. On Linux/WSL2:
 ```bash
 sudo systemctl start docker
 ```
@@ -61,8 +92,8 @@ Once running, the services are available at:
 | Service | URL |
 |---------|-----|
 | Frontend | http://localhost:3000 |
-| Backend API | http://localhost:5000/api/health |
-| Database | localhost:3306 (internal to Docker network) |
+| Backend API | http://localhost:5001/api/health |
+| Database | internal to Docker network (not exposed externally) |
 
 ### 5. View logs
 ```bash
@@ -79,14 +110,6 @@ make stop
 ### 7. Restart
 ```bash
 make restart
-```
-
-### Running without Docker (development)
-You can run the frontend or backend outside Docker for faster iteration. The database must still be running in Docker.
-```bash
-make db              # Start only the database container
-make dev-frontend    # Run React dev server locally (requires npm install in frontend/)
-make dev-backend     # Run Flask locally (requires pip install in backend/)
 ```
 
 ### Environment variables
@@ -204,21 +227,4 @@ sudo systemctl restart docker    # Linux — restart Docker daemon
 make start                       # bring everything back up
 ```
 
-### Nuclear option (full clean rebuild)
-If nothing else works, tear down everything including images and rebuild from scratch:
-```bash
-make clean                       # remove all containers + volumes
-docker compose build --no-cache  # rebuild images from scratch
-make start                       # start fresh
-```
-
-### Common issues
-| Problem | Fix |
-|---------|-----|
-| "Table doesn't exist" or schema errors | `make db-reset` then `make start` |
-| Backend can't connect to database | Make sure Docker is running, then `make restart` |
-| Timetable is empty / no flights | Wait ~15 seconds after startup, or check `make logs-backend` |
-| Simulation won't run | Reset sim data first via the Simulation page (Reset button), or `make db-reset` for a full wipe |
-| Port 3000/5000 already in use | `make stop` to free the ports, or kill the conflicting process |
-| Frontend shows blank page | Check `make logs` for errors; try `make restart` |
 
