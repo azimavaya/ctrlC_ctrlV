@@ -128,11 +128,11 @@ def create_app():
     def health():
         return {"status": "ok", "message": "Panther Cloud Air API running"}
 
-    # ── Background startup tasks ──────────────────────────────────────────
-    # Seed admin user and generate schedule in daemon threads so the
-    # app starts responding to requests immediately.
+    # ── Startup tasks ────────────────────────────────────────────────────
+    # Seed admin synchronously so login works as soon as the app is up.
+    # Schedule generation runs in a background thread (takes ~15 s).
+    _seed_admin(app)
     import threading
-    threading.Thread(target=_seed_admin, args=(app,), daemon=True).start()
     threading.Thread(target=_seed_schedule, args=(app,), daemon=True).start()
 
     return app
