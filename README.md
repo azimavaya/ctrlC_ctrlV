@@ -26,12 +26,13 @@ Airline simulation system for Panther Cloud Air — 56 aircraft, 310 daily fligh
 - **Node.js 20+**
 - **Python 3.12+**
 - **Git**
+- **Make** (build automation)
 
 ### Installing prerequisites on Ubuntu/Debian (including WSL2)
 
-**Git:**
+**Git and Build Tools (includes `make`):**
 ```bash
-sudo apt update && sudo apt install -y git
+sudo apt update && sudo apt install -y git build-essential
 ```
 
 **Docker Engine + Docker Compose:**
@@ -60,8 +61,8 @@ python3 --version
 
 ### 1. Clone the repo
 ```bash
-git clone https://github.com/AlexJohnWilcox/pca.git
-cd pca
+git clone https://github.com/azimavaya/ctrlC_ctrlV.git
+cd ctrlC_ctrlV
 ```
 
 ### 2. Start the Docker daemon
