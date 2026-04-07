@@ -5,10 +5,11 @@
  */
 import { useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { AuthProvider } from "./context/AuthContext";
+import { AuthProvider, useAuth } from "./context/AuthContext";
 import { ThemeProvider } from "./context/ThemeContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Sidebar from "./components/Sidebar";
+import HelpButton from "./components/HelpButton";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import BookFlight from "./pages/BookFlight";
@@ -38,6 +39,7 @@ function Layout({ children }) {
           <p>Panther Cloud Air &copy; 2026</p>
         </footer>
       </div>
+      <HelpButton />
     </div>
   );
 }

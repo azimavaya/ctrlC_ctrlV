@@ -1,0 +1,145 @@
+/* ══════════════════════════════════════════════
+   HelpButton.css — Floating help FAB + panel.
+   ══════════════════════════════════════════════ */
+
+/* ── Floating action button ── */
+.help-container {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 1000;
+}
+
+.help-fab {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background: var(--pca-blue);
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  transition: background 0.2s, transform 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.help-fab:hover {
+  background: #14304f;
+  transform: scale(1.05);
+}
+.help-fab--active {
+  background: #14304f;
+}
+
+/* ── Backdrop ── */
+.help-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+}
+
+/* ── Help panel ── */
+.help-panel {
+  position: absolute;
+  bottom: 60px;
+  right: 0;
+  width: 340px;
+  max-height: 70vh;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: help-slide-up 0.2s ease;
+}
+
+@keyframes help-slide-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.help-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+.help-panel-header h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #1a3a5c;
+}
+.help-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #6b7280;
+  padding: 0;
+  display: flex;
+}
+.help-close:hover { color: #1a3a5c; }
+
+.help-panel-body {
+  padding: 1rem 1.25rem;
+  overflow-y: auto;
+  font-size: 0.88rem;
+  color: #374151;
+  line-height: 1.55;
+}
+
+.help-section {
+  margin-bottom: 1.1rem;
+}
+.help-section:last-child {
+  margin-bottom: 0;
+}
+.help-section h4 {
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #6b7280;
+  margin: 0 0 0.5rem;
+}
+.help-section ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+.help-section li {
+  margin-bottom: 0.4rem;
+}
+
+/* ── Dark mode ── */
+[data-theme="dark"] .help-fab {
+  background: #2563eb;
+}
+[data-theme="dark"] .help-fab:hover,
+[data-theme="dark"] .help-fab--active {
+  background: #1d4ed8;
+}
+[data-theme="dark"] .help-panel {
+  background: #1a2332;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+}
+[data-theme="dark"] .help-panel-header {
+  border-bottom-color: #2d3748;
+}
+[data-theme="dark"] .help-panel-header h3 {
+  color: #60a5fa;
+}
+[data-theme="dark"] .help-close { color: #9ca3af; }
+[data-theme="dark"] .help-close:hover { color: #60a5fa; }
+[data-theme="dark"] .help-panel-body { color: #e5e7eb; }
+[data-theme="dark"] .help-section h4 { color: #9ca3af; }
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .help-panel {
+    width: calc(100vw - 2rem);
+    right: -0.5rem;
+  }
+}
