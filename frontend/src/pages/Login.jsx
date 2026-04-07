@@ -13,6 +13,10 @@ export default function Login() {
   const { login } = useAuth();
   const navigate  = useNavigate();
 
+  // Backend readiness state
+  const [backendReady, setBackendReady] = useState(false);
+  const [readyProgress, setReadyProgress] = useState(0);
+
   // Form input state
   const [username,  setUsername]  = useState("");
   const [password,  setPassword]  = useState("");
@@ -29,8 +33,31 @@ export default function Login() {
 
   const usernameRef = useRef(null);
 
-  // Auto-focus the username field on page load
-  useEffect(() => { usernameRef.current?.focus(); }, []);
+  // Poll backend health until it's ready
+  useEffect(() => {
+    let cancelled = false;
+    let progress = 0;
+    const poll = async () => {
+      while (!cancelled) {
+        try {
+          const res = await fetch("/api/health");
+          if (res.ok) {
+            setReadyProgress(100);
+            setTimeout(() => { if (!cancelled) setBackendReady(true); }, 400);
+            return;
+          }
+        } catch { /* backend not up yet */ }
+        progress = Math.min(progress + 8 + Math.random() * 7, 90);
+        setReadyProgress(Math.round(progress));
+        await new Promise(r => setTimeout(r, 1500));
+      }
+    };
+    poll();
+    return () => { cancelled = true; };
+  }, []);
+
+  // Auto-focus the username field once backend is ready
+  useEffect(() => { if (backendReady) usernameRef.current?.focus(); }, [backendReady]);
 
   /** Submit credentials to the auth API; handle lockout and errors */
   const handleSubmit = async (e) => {
@@ -86,7 +113,15 @@ export default function Login() {
           <h1>Panther Cloud Air</h1>
         </div>
 
-        {!showForgot ? (
+        {!backendReady ? (
+          <div className="login-ready-overlay">
+            <p className="login-ready-text">Preparing systems...</p>
+            <div className="login-progress-track">
+              <div className="login-progress-bar" style={{ width: `${readyProgress}%` }} />
+            </div>
+            <p className="login-ready-subtext">Please wait while the server initializes</p>
+          </div>
+        ) : !showForgot ? (
           <form onSubmit={handleSubmit} className="login-form" autoComplete="off">
             <div className="form-group">
               <label htmlFor="username">Username or Email</label>

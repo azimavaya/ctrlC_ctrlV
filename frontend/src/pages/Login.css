@@ -317,6 +317,43 @@
   user-select: none;
 }
 
+/* ── Backend readiness overlay ── */
+.login-ready-overlay {
+  text-align: center;
+  padding: 1.5rem 0;
+}
+.login-ready-text {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 1.25rem;
+}
+.login-ready-subtext {
+  font-size: 0.82rem;
+  color: #9ca3af;
+  margin-top: 0.85rem;
+}
+.login-progress-track {
+  width: 100%;
+  height: 8px;
+  background: #e5e7eb;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.login-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--pca-blue), #3b82f6);
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+[data-theme="dark"] .login-ready-text { color: #e5e7eb; }
+[data-theme="dark"] .login-ready-subtext { color: #6b7280; }
+[data-theme="dark"] .login-progress-track { background: #2d3748; }
+.login-hc .login-ready-text { color: #fff; }
+.login-hc .login-ready-subtext { color: #aaa; }
+.login-hc .login-progress-track { background: #333; }
+.login-hc .login-progress-bar { background: #ffd700; }
+
 /* ── Loading screen (ProtectedRoute fallback) ── */
 .loading-screen {
   display: flex;
