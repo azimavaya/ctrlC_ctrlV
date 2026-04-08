@@ -86,6 +86,7 @@ make start
 
 On first startup, the backend will automatically:
 - Create the admin user (username: `admin`, password: `pca`)
+- Create the regular user (username: `user`, password: `pass`)
 - Generate the full flight timetable (this takes ~15 seconds)
 
 Once running, the services are available at:
