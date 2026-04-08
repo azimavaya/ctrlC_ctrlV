@@ -32,22 +32,6 @@
 .ad-stat-value { font-size: 2rem; font-weight: 700; color: var(--pca-blue); }
 .ad-stat-label { font-size: 0.8rem; color: var(--pca-gray); text-transform: uppercase; letter-spacing: 0.05em; }
 
-/* Fleet breakdown chips */
-.ad-fleet-breakdown { display: flex; flex-wrap: wrap; gap: 0.75rem; }
-.ad-fleet-chip {
-  background: var(--pca-white);
-  border: 1px solid var(--pca-border);
-  border-radius: var(--radius);
-  padding: 0.5rem 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  box-shadow: var(--shadow);
-}
-.ad-fleet-model { font-weight: 600; color: var(--pca-blue); }
-.ad-fleet-mfr   { color: var(--pca-gray); font-size: 0.85rem; }
-.ad-fleet-count { background: var(--pca-blue); color: #fff; border-radius: 99px; padding: 0.1rem 0.5rem; font-size: 0.8rem; font-weight: 700; }
-
 /* Tabs */
 .ad-sort-bar { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; }
 .ad-sort-label { font-size: 0.82rem; color: var(--pca-gray); font-weight: 600; }
@@ -276,28 +260,3 @@
   font-size: 0.85rem;
 }
 
-/* ── Dark mode ── */
-[data-theme="dark"] .ad-header h2 { color: #60a5fa; }
-[data-theme="dark"] .ad-stat-value { color: #60a5fa; }
-[data-theme="dark"] .ad-fleet-model { color: #60a5fa; }
-[data-theme="dark"] .ad-live-title { color: #60a5fa; }
-[data-theme="dark"] .ad-live-stat { background: #151c28; }
-[data-theme="dark"] .ad-live-stat-value.in-air { color: #38bdf8; }
-[data-theme="dark"] .ad-live-stat-value.completed { color: #4ade80; }
-[data-theme="dark"] .ad-live-stat-value.remaining { color: #fbbf24; }
-[data-theme="dark"] .ad-live-progress { background: #2d3748; }
-[data-theme="dark"] .ad-create-form { background: #151c28; border-color: #2d3748; }
-[data-theme="dark"] .ad-create-fields input,
-[data-theme="dark"] .ad-create-fields select {
-  background: #0f1722;
-  color: #e5e7eb;
-  border-color: #2d3748;
-}
-[data-theme="dark"] .ad-live-section td,
-[data-theme="dark"] .ad-live-section th { color: #e5e7eb; }
-[data-theme="dark"] .ad-tab { color: #9ca3af; }
-[data-theme="dark"] .ad-tab:hover,
-[data-theme="dark"] .ad-tab--active { color: #60a5fa; }
-[data-theme="dark"] .ad-tab--active { border-bottom-color: #60a5fa; }
-[data-theme="dark"] .ad-create-error { color: #f87171; }
-[data-theme="dark"] .ad-error { color: #f87171; }

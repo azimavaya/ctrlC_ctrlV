@@ -1,10 +1,3 @@
-/* ══════════════════════════════════════════════
-   Login.css — Full-screen login page.
-   Sections: background, card, logo, form inputs, password toggle,
-   error messages, submit button, forgot-password flow,
-   accessibility/high-contrast mode, dark mode overrides.
-   ══════════════════════════════════════════════ */
-
 /* ── Full-screen gradient background ── */
 .login-bg {
   min-height: 100vh;
@@ -68,54 +61,6 @@
   border-color: var(--pca-blue);
   box-shadow: 0 0 0 3px rgba(26, 58, 92, 0.1);
 }
-
-/* ── Step 2: greeting row ── */
-.login-greeting {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: var(--pca-light);
-  border-radius: var(--radius);
-  padding: 0.5rem 0.75rem;
-  margin-bottom: 1.2rem;
-  font-size: 0.95rem;
-  color: #374151;
-}
-
-.change-user-btn {
-  margin-left: auto;
-  background: none;
-  border: none;
-  color: var(--pca-blue);
-  font-size: 0.85rem;
-  font-weight: 600;
-  cursor: pointer;
-  padding: 0;
-}
-.change-user-btn:hover { text-decoration: underline; }
-
-/* ── Password label row (label + forgot link) ── */
-.password-label-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 0.4rem;
-}
-
-.password-label-row label {
-  margin-bottom: 0 !important;
-}
-
-.forgot-btn {
-  background: none;
-  border: none;
-  color: var(--pca-blue);
-  font-size: 0.82rem;
-  font-weight: 500;
-  cursor: pointer;
-  padding: 0;
-}
-.forgot-btn:hover { text-decoration: underline; }
 
 /* ── Password + eye wrapper ── */
 .password-input-wrap {
@@ -289,23 +234,6 @@
   color: #ffd700;
 }
 
-/* ── Divider ── */
-.login-divider {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 1.25rem;
-  color: #9ca3af;
-  font-size: 0.82rem;
-}
-.login-divider::before,
-.login-divider::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: #e5e7eb;
-}
-
 /* ── Trademark bottom-left ── */
 .login-trademark {
   position: fixed;
@@ -346,9 +274,6 @@
   border-radius: 4px;
   transition: width 0.5s ease;
 }
-[data-theme="dark"] .login-ready-text { color: #e5e7eb; }
-[data-theme="dark"] .login-ready-subtext { color: #6b7280; }
-[data-theme="dark"] .login-progress-track { background: #2d3748; }
 .login-hc .login-ready-text { color: #fff; }
 .login-hc .login-ready-subtext { color: #aaa; }
 .login-hc .login-progress-track { background: #333; }
@@ -364,27 +289,3 @@
   color: var(--pca-gray);
 }
 
-/* ── Dark mode ── */
-[data-theme="dark"] .login-card {
-  background: #1a2332;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-}
-[data-theme="dark"] .login-logo h1 { color: #60a5fa; }
-[data-theme="dark"] .login-form .form-group label { color: #e5e7eb; }
-[data-theme="dark"] .login-form .form-group input {
-  background: #0f1722;
-  color: #e5e7eb;
-  border-color: #2d3748;
-}
-[data-theme="dark"] .login-form .form-group input::placeholder { color: #6b7280; }
-[data-theme="dark"] .login-form .form-group input:focus {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
-}
-[data-theme="dark"] .login-error { background: #450a0a; color: #fca5a5; }
-[data-theme="dark"] .forgot-link { color: #9ca3af; }
-[data-theme="dark"] .forgot-link:hover { color: #60a5fa; }
-[data-theme="dark"] .forgot-instructions,
-[data-theme="dark"] .forgot-success { color: #9ca3af; }
-[data-theme="dark"] .eye-btn { color: #9ca3af; }
-[data-theme="dark"] .eye-btn:hover { color: #60a5fa; }

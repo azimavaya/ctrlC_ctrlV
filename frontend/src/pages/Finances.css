@@ -188,39 +188,3 @@
 }
 .fin-error { color: #ef4444; }
 
-/* ── Dark mode ──────────────────────────────────────────────────── */
-[data-theme="dark"] .fin-header h2 { color: #60a5fa; }
-[data-theme="dark"] .fin-section h3 { color: #60a5fa; }
-[data-theme="dark"] .fin-dst-panel h3 { color: #60a5fa; }
-[data-theme="dark"] .fin-summary-value { color: #60a5fa; }
-
-[data-theme="dark"] .fin-table thead th {
-  background: #1e293b;
-  color: #9ca3af;
-}
-[data-theme="dark"] .fin-table td {
-  color: #e5e7eb;
-}
-[data-theme="dark"] .fin-table tbody tr:hover td {
-  background: #1e2a3a;
-}
-[data-theme="dark"] .fin-row-revenue td {
-  background: #052e16;
-}
-
-[data-theme="dark"] .fin-text-green { color: #6ee7b7; }
-[data-theme="dark"] .fin-text-red   { color: #fca5a5; }
-[data-theme="dark"] .fin-error       { color: #f87171; }
-
-[data-theme="dark"] .fin-dst-item {
-  background: #151c28;
-  border-left-color: #3b82f6;
-}
-[data-theme="dark"] .fin-dst-region { color: #60a5fa; }
-[data-theme="dark"] .fin-dst-dates  { color: #93c5fd; }
-
-[data-theme="dark"] .fin-currency-pick select {
-  background: #0f1722;
-  color: #e5e7eb;
-  border-color: #2d3748;
-}

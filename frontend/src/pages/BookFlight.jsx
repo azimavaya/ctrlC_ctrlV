@@ -1,9 +1,3 @@
-/**
- * BookFlight.jsx — 3-step booking wizard.
- *   Step 1: Search flights by origin, destination, and date. Shows direct and connecting options.
- *   Step 2: Enter passenger details (name, email, phone, address).
- *   Step 3: Confirmation page with booking reference and summary.
- */
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import "./BookFlight.css";
@@ -12,25 +6,20 @@ const API = "/api";
 
 export default function BookFlight() {
   const { authFetch } = useAuth();
-  const [step, setStep] = useState(1);        // current wizard step (1, 2, or 3)
-  const [airports, setAirports] = useState([]); // list of airports for dropdown selects
+  const [step, setStep] = useState(1);
+  const [airports, setAirports] = useState([]);
 
-  // Step 1 — flight search state
   const [form, setForm] = useState({ origin: "", destination: "", date: "" });
-  const [results, setResults] = useState(null);       // search results from API
+  const [results, setResults] = useState(null);
   const [searching, setSearching] = useState(false);
   const [searchError, setSearchError] = useState(null);
-  const [selectedFlight, setSelectedFlight] = useState(null); // chosen flight (direct or connecting)
+  const [selectedFlight, setSelectedFlight] = useState(null);
 
-  // Step 2 — passenger information state
   const [passenger, setPassenger] = useState({ name: "", email: "", phone: "", address: "" });
 
-  // Step 3 — booking confirmation state
-  const [booking, setBooking] = useState(null);        // response from POST /api/bookings
+  const [booking, setBooking] = useState(null);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState(null);
-
-  // Load airport list on mount for the origin/destination dropdowns
   useEffect(() => {
     fetch(`${API}/airports/`)
       .then(r => r.json())
@@ -38,10 +27,8 @@ export default function BookFlight() {
       .catch(() => {});
   }, []);
 
-  // Get today's date in YYYY-MM-DD for min date on input
   const today = new Date().toISOString().split("T")[0];
 
-  /** Search for available flights (direct + connecting) via GET /api/bookings/search */
   const handleSearch = async (e) => {
     e.preventDefault();
     setSearching(true);

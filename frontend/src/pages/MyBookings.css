@@ -1,9 +1,3 @@
-/* ══════════════════════════════════════════════
-   MyBookings.css — Booking list page.
-   Sections: booking cards (header, route, details grid, footer),
-   delete button, empty state, dark mode overrides.
-   ══════════════════════════════════════════════ */
-
 .bookings-page h2 { margin-bottom: 1rem; }
 .bookings-loading { color: var(--pca-gray); }
 
@@ -149,19 +143,3 @@
   margin-bottom: 1rem;
 }
 
-/* ── Dark mode ── */
-[data-theme="dark"] .booking-card-header { background: rgba(59, 130, 246, 0.08); }
-[data-theme="dark"] .booking-ref { color: #60a5fa; }
-[data-theme="dark"] .booking-iata { color: #60a5fa; }
-[data-theme="dark"] .booking-city,
-[data-theme="dark"] .booking-ref-label,
-[data-theme="dark"] .booking-route-arrow,
-[data-theme="dark"] .detail-label,
-[data-theme="dark"] .booking-date { color: #9ca3af; }
-[data-theme="dark"] .detail-value { color: #e5e7eb; }
-[data-theme="dark"] .detail-fare { color: #4ade80; }
-[data-theme="dark"] .cabin-eco { background: #1e3a5f; color: #60a5fa; }
-[data-theme="dark"] .booking-card-footer { background: rgba(59, 130, 246, 0.04); }
-[data-theme="dark"] .btn-delete-booking { color: #f87171; border-color: #f87171; }
-[data-theme="dark"] .btn-delete-booking:hover { background: #dc2626; color: #fff; }
-[data-theme="dark"] .error-msg { background: #450a0a; color: #fca5a5; }

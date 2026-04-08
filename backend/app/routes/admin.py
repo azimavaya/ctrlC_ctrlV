@@ -3,7 +3,7 @@ admin.py — Admin-only endpoints for schedule generation, dashboard overview,
 and live flight statistics.  All routes require the 'admin' role.
 """
 from datetime import datetime, timezone
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify
 from ..db import get_db
 from ..middleware import role_required
 from ..config import Config

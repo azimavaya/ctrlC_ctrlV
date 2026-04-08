@@ -34,12 +34,10 @@ def _rate_limit_ok(ip):
 @auth_bp.route("/login", methods=["POST"])
 def login():
     """Authenticate a user and return a JWT on success."""
-    # Step 1: Rate-limit by client IP (sliding window, 10 attempts/min)
     client_ip = request.remote_addr or "unknown"
     if not _rate_limit_ok(client_ip):
         return jsonify({"error": "Too many login attempts. Please wait a moment."}), 429
 
-    # Step 2: Sanitize and truncate input to prevent abuse
     data = request.get_json(silent=True) or {}
     username = (data.get("username") or "").strip()[:INPUT_MAX_LEN]
     password = (data.get("password") or "")[:INPUT_MAX_LEN]
@@ -50,7 +48,6 @@ def login():
     db = get_db()
     cursor = db.cursor(dictionary=True)
 
-    # Step 3: Look up user — allow login by username OR email
     if "@" in username:
         cursor.execute("""
             SELECT u.user_id, u.username, u.password_hash, u.is_active,
@@ -71,7 +68,6 @@ def login():
         """, (username,))
     user = cursor.fetchone()
 
-    # Step 4: Validate user state (exists, active, not locked)
     if not user:
         cursor.close()
         return jsonify({"error": "Invalid username or password"}), 401
@@ -84,7 +80,6 @@ def login():
         cursor.close()
         return jsonify({"error": "account_locked"}), 423
 
-    # Step 5: Verify password; lock account after 5 consecutive failures
     if not check_password(password, user["password_hash"]):
         new_count = user["failed_login_attempts"] + 1
         if new_count >= 5:
@@ -104,7 +99,6 @@ def login():
             cursor.close()
             return jsonify({"error": "Invalid username or password"}), 401
 
-    # Step 6: Success — reset lockout counter and record login timestamp
     cursor.execute(
         "UPDATE users SET last_login = NOW(), failed_login_attempts = 0, locked_at = NULL WHERE user_id = %s",
         (user["user_id"],)
@@ -112,7 +106,6 @@ def login():
     db.commit()
     cursor.close()
 
-    # Step 7: Issue a signed JWT containing user_id, username, and role
     token = generate_token(user["user_id"], user["username"], user["role_name"])
     return jsonify({
         "token":    token,

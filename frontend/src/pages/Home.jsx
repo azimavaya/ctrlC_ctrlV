@@ -1,9 +1,3 @@
-/**
- * Home.jsx — Dashboard landing page after login.
- * Shows a hero banner with live flight stats (total, in-air, completed, remaining),
- * tables of completed/in-air/next-departure flights, and quick-access navigation cards.
- * Stats auto-refresh every 60 seconds. Supports UTC/ET timezone toggle.
- */
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
@@ -11,24 +5,20 @@ import "./Home.css";
 
 const API = "/api";
 
-// Timezone options for the hero display toggle
 const TZ_OPTIONS = {
   UTC: { label: "UTC", zone: "UTC" },
   ET:  { label: "ET",  zone: "America/New_York" },
 };
 
-/** Returns a human-readable label for today's date (e.g. "Thursday, April 3, 2026") */
 function todayLabel() {
   return new Date().toLocaleDateString("en-US", {
     weekday: "long", month: "long", day: "numeric", year: "numeric",
   });
 }
 
-/** Format a UTC datetime string into a localized time (e.g. "02:30 PM") in the selected timezone */
 function fmt(dt, tz) {
   if (!dt) return "—";
-  const d = new Date(dt + (dt.endsWith("Z") ? "" : "Z")); // ensure UTC parse
-  // Remap UTC time-of-day onto today's date so DST offset is correct
+  const d = new Date(dt + (dt.endsWith("Z") ? "" : "Z"));
   const now = new Date();
   const today = new Date(Date.UTC(
     now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),
@@ -46,7 +36,6 @@ export default function Home() {
   const [tz, setTz]                 = useState("UTC");
   const [showInfo, setShowInfo]     = useState(false);
 
-  /** Fetch live flight statistics from the backend */
   const loadLive = () => {
     fetch(`${API}/flights/live-stats`)
       .then(r => r.json())
@@ -56,7 +45,6 @@ export default function Home() {
 
   useEffect(() => { loadLive(); }, []);
 
-  // Refresh live stats every 60 seconds
   useEffect(() => {
     const id = setInterval(loadLive, 60_000);
     return () => clearInterval(id);
@@ -65,7 +53,6 @@ export default function Home() {
   return (
     <div className="home">
 
-      {/* ── Hero banner ── */}
       <div className="home-hero" style={{ position: "relative" }}>
         {user?.role === "admin" && (
           <button
@@ -131,7 +118,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* ── Completed + in-air + next departures ── */}
       {live && (live.in_air_flights?.length > 0 || live.next_departures?.length > 0 || live.completed_flights?.length > 0) && (
         <div className="home-live-tables">
           {live.completed_flights?.length > 0 && (
@@ -208,7 +194,6 @@ export default function Home() {
         </div>
       )}
 
-      {/* ── Quick-access cards ── */}
       <div className="home-cards">
         <Link to="/book" className="home-card">
           <div className="home-card-icon">✈</div>
@@ -234,7 +219,6 @@ export default function Home() {
         )}
       </div>
 
-      {/* ── Info Panel Modal ── */}
       {showInfo && (
         <div className="info-overlay" onClick={() => setShowInfo(false)}>
           <div className="info-panel" onClick={e => e.stopPropagation()}>

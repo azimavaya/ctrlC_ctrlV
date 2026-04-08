@@ -263,7 +263,6 @@ def create_booking():
     }), 201
 
 
-@bookings_bp.route("", methods=["GET"])
 @bookings_bp.route("/", methods=["GET"])
 @token_required
 def list_bookings():

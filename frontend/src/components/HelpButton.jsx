@@ -1,7 +1,3 @@
-/**
- * HelpButton.jsx — Floating help button (bottom-right) with expandable panel.
- * Shows context-appropriate help for admins and regular users.
- */
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import "./HelpButton.css";
@@ -49,7 +45,7 @@ export default function HelpButton() {
                 <h4>Tips</h4>
                 <ul>
                   <li>Use the sidebar to navigate between pages.</li>
-                  <li>Toggle dark mode from the sidebar settings.</li>
+                  <li>Use the sidebar to collapse or expand the navigation.</li>
                   <li>Connecting flights are shown when no direct route exists.</li>
                 </ul>
               </section>

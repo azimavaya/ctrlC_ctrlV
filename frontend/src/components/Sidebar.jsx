@@ -1,12 +1,5 @@
-/**
- * Sidebar.jsx — Collapsible side navigation used on all authenticated pages.
- * Contains nav links (filtered by user role), a dark-mode toggle, and user info.
- * Admin-only items (Simulation, Finances, Admin Dashboard) are hidden from regular users.
- */
-import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { useTheme } from "../context/ThemeContext";
 import "./Sidebar.css";
 
 const IconHome = () => (
@@ -74,7 +67,6 @@ const IconClose = () => (
   </svg>
 );
 
-// Role-to-color map for the user avatar circle in the sidebar footer
 const ROLE_COLORS = {
   admin:   "#ef4444",
   user: "#0ea5e9",
@@ -82,7 +74,6 @@ const ROLE_COLORS = {
 
 export default function Sidebar({ open, onToggle }) {
   const { user, logout } = useAuth();
-  const { dark, toggleDark } = useTheme();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -93,7 +84,6 @@ export default function Sidebar({ open, onToggle }) {
   const initials = user?.username?.slice(0, 2).toUpperCase() ?? "??";
   const roleColor = ROLE_COLORS[user?.role] ?? "#6b7280";
 
-  // Navigation items — items with roles:["admin"] are hidden from regular users
   const navItems = [
     { to: "/",            label: "Home",           Icon: IconHome,     roles: null },
     { to: "/book",         label: "Book Flight",     Icon: IconSearch,   roles: null },
@@ -106,17 +96,14 @@ export default function Sidebar({ open, onToggle }) {
 
   return (
     <>
-      {/* Backdrop on mobile / when open */}
       {open && <div className="sidebar-backdrop" onClick={onToggle} />}
 
       <aside className={`sidebar ${open ? "sidebar--open" : "sidebar--closed"}`}>
 
-        {/* ── Toggle button ── */}
         <button className="sidebar-toggle" onClick={onToggle} aria-label="Toggle sidebar">
           {open ? <IconClose /> : <IconMenu />}
         </button>
 
-        {/* ── Nav items ── */}
         <nav className="sidebar-nav">
           {navItems.map(({ to, label, Icon }) => (
             <NavLink
@@ -134,32 +121,7 @@ export default function Sidebar({ open, onToggle }) {
           ))}
         </nav>
 
-        {/* ── Dark mode toggle ── */}
-        <button
-          className="sidebar-dark-toggle"
-          onClick={toggleDark}
-          aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
-          title={dark ? "Switch to light mode" : "Switch to dark mode"}
-        >
-          <span className="sidebar-icon">
-            {dark ? (
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <circle cx="12" cy="12" r="5"/>
-                <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
-                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-                <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
-                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-              </svg>
-            ) : (
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
-              </svg>
-            )}
-          </span>
-          {open && <span className="sidebar-label">{dark ? "Light Mode" : "Dark Mode"}</span>}
-        </button>
-
-        {/* ── User block at bottom ── */}
+        {/* ── User block ── */}
         <div className="sidebar-user">
           <div className="sidebar-avatar" style={{ background: roleColor }}>
             {initials}

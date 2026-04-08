@@ -1,10 +1,4 @@
-/* ══════════════════════════════════════════════
-   Home.css — Dashboard landing page.
-   Sections: hero banner, timezone toggle, live stats strip,
-   flight tables (completed/in-air/departures), quick-access cards, dark mode.
-   ══════════════════════════════════════════════ */
-
-/* ── Hero ───────────────────────────────────────────────────────── */
+/* ── Hero ── */
 .home-hero {
   display: flex;
   align-items: center;
@@ -214,67 +208,6 @@
 }
 .home-live-tbl tbody tr:hover td { background: #eef3ff; }
 
-/* ── Departure board ────────────────────────────────────────────── */
-.home-departures-card { padding: 0; overflow: hidden; margin-bottom: 1.75rem; }
-
-.home-board-header {
-  background: var(--pca-blue);
-  color: var(--pca-white);
-  padding: 0.85rem 1.25rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.home-board-title {
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.home-board-sub { font-size: 0.78rem; opacity: 0.65; }
-
-.home-board-loading {
-  padding: 2rem;
-  text-align: center;
-  color: var(--pca-gray);
-}
-
-.home-board-scroll { overflow-x: auto; overflow-y: auto; max-height: 480px; }
-
-.home-board-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.88rem;
-}
-
-.home-board-table thead th {
-  background: #f1f5f9;
-  color: var(--pca-gray);
-  font-size: 0.72rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  padding: 0.6rem 1rem;
-  text-align: left;
-  border-bottom: 1px solid var(--pca-border);
-  position: sticky;
-  top: 0;
-  z-index: 1;
-}
-
-.home-board-table td {
-  padding: 0.65rem 1rem;
-  border-bottom: 1px solid var(--pca-border);
-  vertical-align: middle;
-}
-
-.row-even td { background: var(--pca-white); }
-.row-odd  td { background: #fafbfd; }
-.home-board-table tbody tr:last-child td { border-bottom: none; }
-.home-board-table tbody tr:hover td { background: #eef3ff; }
-
 .home-fn       { font-weight: 700; color: var(--pca-blue); font-family: monospace; font-size: 0.92rem; }
 .home-iata     { font-weight: 700; color: var(--pca-blue); margin-right: 0.4rem; }
 .home-city     { color: var(--pca-gray); font-size: 0.82rem; }
@@ -329,9 +262,6 @@
 .home-card h3   { font-size: 1rem; color: var(--pca-blue); font-weight: 700; }
 .home-card p    { font-size: 0.85rem; color: var(--pca-gray); line-height: 1.5; }
 
-.home-card--it    { border-top: 3px solid #8b5cf6; }
-.home-card--admin { border-top: 3px solid #ef4444; }
-
 @media (max-width: 800px) {
   .home-hero { flex-direction: column; }
   .home-hero-right { width: 100%; }
@@ -341,37 +271,6 @@
   .home-live-item { min-width: 70px; padding: 0.5rem 0.8rem; }
   .home-cards { flex-wrap: wrap; }
 }
-
-/* ── Dark mode ── */
-[data-theme="dark"] .home-hero {
-  background: linear-gradient(135deg, #0a1628 0%, #1e3d5f 60%, #1a3a5c);
-  color: #e5e7eb;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.4);
-}
-[data-theme="dark"] .home-live-tbl thead th,
-[data-theme="dark"] .home-board-table thead th {
-  background: #1e293b;
-  color: #9ca3af;
-}
-[data-theme="dark"] .home-live-tbl td,
-[data-theme="dark"] .home-board-table td { color: #e5e7eb; }
-[data-theme="dark"] .home-live-tbl tbody tr:hover td,
-[data-theme="dark"] .home-board-table tbody tr:hover td { background: #1e2a3a; }
-[data-theme="dark"] .row-even td { background: #1a2332; }
-[data-theme="dark"] .row-odd td  { background: #151c28; }
-[data-theme="dark"] .home-time { color: #e5e7eb; }
-[data-theme="dark"] .home-card {
-  background: #1a2332;
-  border-color: #2d3748;
-}
-[data-theme="dark"] .home-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
-[data-theme="dark"] .home-card h3 { color: #60a5fa; }
-[data-theme="dark"] .home-card p { color: #9ca3af; }
-[data-theme="dark"] .home-live-card-hdr--done { background: #064e3b; }
-[data-theme="dark"] .pill--blue  { background: #1e3a5f; color: #60a5fa; }
-[data-theme="dark"] .pill--gold  { background: #422006; color: #fbbf24; }
-[data-theme="dark"] .pill--green { background: #064e3b; color: #6ee7b7; }
-[data-theme="dark"] .pill--red   { background: #450a0a; color: #fca5a5; }
 
 /* ── Info Panel Modal ─────────────────────────────────────────── */
 .info-overlay {
@@ -401,10 +300,3 @@
 }
 .info-close:hover { background: #e2e8f0; color: #1e293b; }
 
-/* Dark mode */
-[data-theme="dark"] .info-panel { background: #1e293b; color: #e2e8f0; }
-[data-theme="dark"] .info-panel h2 { color: #93c5fd; }
-[data-theme="dark"] .info-panel h3 { color: #93c5fd; }
-[data-theme="dark"] .info-panel code { background: #334155; color: #e2e8f0; }
-[data-theme="dark"] .info-close { background: #334155; color: #94a3b8; }
-[data-theme="dark"] .info-close:hover { background: #475569; color: #f1f5f9; }

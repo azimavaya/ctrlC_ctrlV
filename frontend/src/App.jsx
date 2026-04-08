@@ -1,12 +1,6 @@
-/**
- * App.jsx — Root component defining the route structure and page layout.
- * Wraps everything in ThemeProvider (dark/light mode) and AuthProvider (login state).
- * Uses ProtectedRoute to guard authenticated and admin-only pages.
- */
 import { useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "./context/AuthContext";
-import { ThemeProvider } from "./context/ThemeContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Sidebar from "./components/Sidebar";
 import HelpButton from "./components/HelpButton";
@@ -22,17 +16,12 @@ import Search from "./pages/Search";
 import Unauthorized from "./pages/Unauthorized";
 import "./App.css";
 
-/**
- * Layout — Shared page shell with collapsible sidebar, main content area, and footer.
- * Every authenticated page is rendered inside this wrapper.
- */
 function Layout({ children }) {
-  const [sidebarOpen, setSidebarOpen] = useState(false); // tracks sidebar expand/collapse
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
     <div className="app">
       <Sidebar open={sidebarOpen} onToggle={() => setSidebarOpen(v => !v)} />
-      {/* Shift main content right depending on sidebar width */}
       <div className={`layout-body ${sidebarOpen ? "layout-body--open" : "layout-body--closed"}`}>
         <main className="main-content">{children}</main>
         <footer className="footer">
@@ -46,14 +35,11 @@ function Layout({ children }) {
 
 export default function App() {
   return (
-    <ThemeProvider>
     <AuthProvider>
       <Routes>
-        {/* Public */}
         <Route path="/login" element={<Login />} />
         <Route path="/unauthorized" element={<Layout><Unauthorized /></Layout>} />
 
-        {/* All logged-in users */}
         <Route path="/" element={
           <ProtectedRoute>
             <Layout><Home /></Layout>
@@ -79,7 +65,6 @@ export default function App() {
             <Layout><Search /></Layout>
           </ProtectedRoute>
         } />
-        {/* Admin only */}
         <Route path="/simulation" element={
           <ProtectedRoute roles={["admin"]}>
             <Layout><Simulation /></Layout>
@@ -91,17 +76,14 @@ export default function App() {
           </ProtectedRoute>
         } />
 
-        {/* Admin only */}
         <Route path="/admin" element={
           <ProtectedRoute roles={["admin"]}>
             <Layout><AdminDashboard /></Layout>
           </ProtectedRoute>
         } />
 
-        {/* Catch-all */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </AuthProvider>
-    </ThemeProvider>
   );
 }

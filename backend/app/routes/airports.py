@@ -3,7 +3,7 @@ airports.py — REST endpoints for querying PCA airports.
 
 Provides list/detail views for all 31 airports and a hub-only filter.
 """
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify
 from ..db import get_db
 
 airports_bp = Blueprint("airports", __name__)

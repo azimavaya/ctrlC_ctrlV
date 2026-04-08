@@ -1,15 +1,8 @@
-/* ══════════════════════════════════════════════
-   App.css — Global layout, shared cards, buttons,
-   forms, tables, and their dark-mode overrides.
-   ══════════════════════════════════════════════ */
-
-/* ── App shell — full-height flex row (sidebar + body) ── */
 .app {
   display: flex;
   min-height: 100vh;
 }
 
-/* ── Sidebar layout shift ── */
 .layout-body {
   display: flex;
   flex-direction: column;
@@ -42,7 +35,6 @@
   font-size: 0.85rem;
 }
 
-/* ── Shared Card ───── */
 .card {
   background: var(--pca-white);
   border-radius: var(--radius);
@@ -51,7 +43,6 @@
   margin-bottom: 1.5rem;
 }
 
-/* ── Shared Button ─── */
 .btn-primary {
   background: var(--pca-blue);
   color: var(--pca-white);
@@ -64,7 +55,6 @@
 }
 .btn-primary:hover { background: #14304f; }
 
-/* ── Form ──────────── */
 .form-group { margin-bottom: 1rem; }
 .form-group label { display: block; font-weight: 600; margin-bottom: 0.3rem; }
 .form-group input,
@@ -76,7 +66,6 @@
   font-size: 1rem;
 }
 
-/* ── Table ─────────── */
 .pca-table {
   width: 100%;
   border-collapse: collapse;
@@ -93,34 +82,3 @@
   border-bottom: 1px solid var(--pca-border);
 }
 .pca-table tr:hover td { background: var(--pca-light); }
-
-/* ══════════════════════════════════════════════
-   Dark mode overrides for shared components
-   ══════════════════════════════════════════════ */
-[data-theme="dark"] .card {
-  background: var(--pca-card-bg);
-  box-shadow: 0 2px 12px rgba(0,0,0,0.3);
-}
-
-[data-theme="dark"] .btn-primary {
-  background: #2563eb;
-  color: #fff;
-}
-[data-theme="dark"] .btn-primary:hover { background: #1d4ed8; }
-
-[data-theme="dark"] .form-group label { color: var(--pca-text); }
-[data-theme="dark"] .form-group input,
-[data-theme="dark"] .form-group select {
-  background: #0f1722;
-  color: var(--pca-text);
-  border-color: var(--pca-border);
-}
-[data-theme="dark"] .form-group input:focus,
-[data-theme="dark"] .form-group select:focus {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
-}
-
-[data-theme="dark"] .pca-table th { background: #1e293b; color: #e5e7eb; }
-[data-theme="dark"] .pca-table td { border-bottom-color: var(--pca-border); color: var(--pca-text); }
-[data-theme="dark"] .pca-table tr:hover td { background: var(--pca-table-hover); }

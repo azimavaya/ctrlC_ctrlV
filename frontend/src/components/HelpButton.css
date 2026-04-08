@@ -1,7 +1,3 @@
-/* ══════════════════════════════════════════════
-   HelpButton.css — Floating help FAB + panel.
-   ══════════════════════════════════════════════ */
-
 /* ── Floating action button ── */
 .help-container {
   position: fixed;
@@ -112,29 +108,6 @@
 .help-section li {
   margin-bottom: 0.4rem;
 }
-
-/* ── Dark mode ── */
-[data-theme="dark"] .help-fab {
-  background: #2563eb;
-}
-[data-theme="dark"] .help-fab:hover,
-[data-theme="dark"] .help-fab--active {
-  background: #1d4ed8;
-}
-[data-theme="dark"] .help-panel {
-  background: #1a2332;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
-}
-[data-theme="dark"] .help-panel-header {
-  border-bottom-color: #2d3748;
-}
-[data-theme="dark"] .help-panel-header h3 {
-  color: #60a5fa;
-}
-[data-theme="dark"] .help-close { color: #9ca3af; }
-[data-theme="dark"] .help-close:hover { color: #60a5fa; }
-[data-theme="dark"] .help-panel-body { color: #e5e7eb; }
-[data-theme="dark"] .help-section h4 { color: #9ca3af; }
 
 /* ── Responsive ── */
 @media (max-width: 480px) {

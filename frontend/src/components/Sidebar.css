@@ -1,10 +1,4 @@
-/* ══════════════════════════════════════════════
-   Sidebar.css — Collapsible sidebar navigation.
-   Sections: widths/transitions, toggle button, nav items,
-   active states, dark-mode toggle, user block, mobile backdrop.
-   ══════════════════════════════════════════════ */
-
-/* ── Width variables and transition speed ── */
+/* ── Width variables ── */
 :root {
   --sidebar-closed: 64px;
   --sidebar-open:   240px;
@@ -100,35 +94,6 @@
   text-overflow: ellipsis;
 }
 
-/* ── Dark mode toggle ── */
-.sidebar-dark-toggle {
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
-  padding: 0.65rem 0;
-  padding-left: 20px;
-  color: rgba(255,255,255,0.65);
-  background: none;
-  border: none;
-  border-top: 1px solid rgba(255,255,255,0.08);
-  white-space: nowrap;
-  cursor: pointer;
-  transition: background 0.15s, color 0.15s;
-  flex-shrink: 0;
-  width: 100%;
-  text-align: left;
-  font-family: var(--font);
-}
-.sidebar-dark-toggle:hover {
-  background: rgba(255,255,255,0.07);
-  color: #fff;
-}
-.sidebar-dark-toggle .sidebar-icon svg { width: 20px; height: 20px; }
-.sidebar-dark-toggle .sidebar-label {
-  font-size: 0.9rem;
-  font-weight: 500;
-}
-
 /* ── User block ── */
 .sidebar-user {
   display: flex;
@@ -211,8 +176,3 @@
   .sidebar-backdrop { display: block; }
 }
 
-/* ── Dark mode ── */
-[data-theme="dark"] .sidebar {
-  background: #0a1628;
-  box-shadow: 2px 0 12px rgba(0,0,0,0.5);
-}
