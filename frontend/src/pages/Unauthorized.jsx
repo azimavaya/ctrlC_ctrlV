@@ -1,4 +1,4 @@
-/** Unauthorized.jsx — Shown when a user tries to access a page they don't have permission for. */
+// Shown when a user tries to access a page they don't have permission for.
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 

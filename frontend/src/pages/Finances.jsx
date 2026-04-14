@@ -1,9 +1,8 @@
-/**
- * Finances.jsx — Financial reporting page (admin-only).
- * Shows simulation revenue, costs (fuel/lease/landing), and profit/loss.
- * Supports USD/EUR currency toggle (1.08 rate). Includes daily breakdown
- * table with per-day flights, passengers, and cost categories.
- */
+// Financial reporting page (admin-only).
+// Shows simulation revenue, costs (fuel/lease/landing), and profit/loss.
+// Supports USD/EUR currency toggle (1.08 rate). Includes daily breakdown
+// table with per-day flights, passengers, and cost categories.
+
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import "./Finances.css";

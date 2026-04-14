@@ -1,4 +1,4 @@
-/* ── Full-screen gradient background ── */
+/* Full-screen gradient background */
 .login-bg {
   min-height: 100vh;
   background: linear-gradient(135deg, #0f2744 0%, #1a3a5c 60%, #2563a8 100%);
@@ -17,7 +17,7 @@
   max-width: 460px;
 }
 
-/* ── Logo ── */
+/* Logo */
 .login-logo {
   text-align: center;
   margin-bottom: 2rem;
@@ -34,7 +34,7 @@
   color: var(--pca-blue);
 }
 
-/* ── Form ── */
+/* Form */
 .login-form .form-group {
   margin-bottom: 1.2rem;
 }
@@ -62,7 +62,7 @@
   box-shadow: 0 0 0 3px rgba(26, 58, 92, 0.1);
 }
 
-/* ── Password + eye wrapper ── */
+/* Password + eye wrapper */
 .password-input-wrap {
   position: relative;
 }
@@ -88,7 +88,7 @@
 .eye-btn:hover { color: var(--pca-blue); }
 .eye-btn svg { width: 18px; height: 18px; }
 
-/* ── Error ── */
+/* Error */
 .login-error {
   background: #fee2e2;
   color: #b91c1c;
@@ -99,7 +99,7 @@
   text-align: center;
 }
 
-/* ── Submit button ── */
+/* Submit button */
 .login-btn {
   width: 100%;
   padding: 0.75rem;
@@ -113,7 +113,7 @@
   cursor: not-allowed;
 }
 
-/* ── Forgot link (now a button) ── */
+/* Forgot link (now a button) */
 .forgot-link {
   display: block;
   width: 100%;
@@ -133,7 +133,7 @@
   text-decoration: underline;
 }
 
-/* ── Forgot password flow ── */
+/* Forgot password flow */
 .forgot-instructions {
   color: #6b7280;
   font-size: 0.9rem;
@@ -149,7 +149,7 @@
   line-height: 1.5;
 }
 
-/* ── Accessibility toggle ── */
+/* Accessibility toggle */
 .login-a11y-toggle {
   position: fixed;
   top: 1rem;
@@ -170,7 +170,7 @@
   color: #fff;
 }
 
-/* ── High contrast mode ── */
+/* High contrast mode */
 .login-hc {
   background: #000 !important;
 }
@@ -234,7 +234,7 @@
   color: #ffd700;
 }
 
-/* ── Trademark bottom-left ── */
+/* Trademark bottom-left */
 .login-trademark {
   position: fixed;
   bottom: 1rem;
@@ -245,7 +245,7 @@
   user-select: none;
 }
 
-/* ── Backend readiness overlay ── */
+/* Backend readiness overlay */
 .login-ready-overlay {
   text-align: center;
   padding: 1.5rem 0;
@@ -279,7 +279,7 @@
 .login-hc .login-progress-track { background: #333; }
 .login-hc .login-progress-bar { background: #ffd700; }
 
-/* ── Loading screen (ProtectedRoute fallback) ── */
+/* Loading screen (ProtectedRoute fallback) */
 .loading-screen {
   display: flex;
   align-items: center;

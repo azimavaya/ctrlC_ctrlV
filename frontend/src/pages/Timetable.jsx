@@ -1,8 +1,7 @@
-/**
- * Timetable.jsx — Full daily flight schedule with filtering and timezone support.
- * Features: origin/destination airport filters, UTC/ET/Local timezone toggle,
- * print-friendly view, and color-coded status badges.
- */
+// Full daily flight schedule with filtering and timezone support.
+// Features: origin/destination airport filters, UTC/ET/Local timezone toggle,
+// print-friendly view, and color-coded status badges.
+
 import { useState, useEffect } from "react";
 import "./Timetable.css";
 

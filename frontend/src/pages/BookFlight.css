@@ -1,6 +1,6 @@
 .book-page h2 { margin-bottom: 1rem; }
 
-/* ── Step Indicator ── */
+/* Step Indicator */
 .step-indicator {
   display: flex;
   align-items: center;
@@ -43,7 +43,7 @@
   margin-bottom: 1.2rem;
 }
 
-/* ── Search Form ── */
+/* Search Form */
 .search-form .form-row {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -51,12 +51,12 @@
   margin-bottom: 1rem;
 }
 
-/* ── Flight Results ── */
+/* Flight Results */
 .flight-results h3 { margin-bottom: 1rem; }
 .flight-results h4 { margin-bottom: 0.75rem; color: var(--pca-blue); }
 .no-results { color: var(--pca-gray); font-style: italic; }
 
-/* ── Flight Cards ── */
+/* Flight Cards */
 .flight-cards {
   display: flex;
   flex-direction: column;
@@ -172,7 +172,7 @@
   font-size: 0.9rem;
 }
 
-/* ── Step 2: Passenger ── */
+/* Step 2: Passenger */
 .booking-summary-mini {
   background: rgba(26, 54, 93, 0.04);
   border-left: 4px solid var(--pca-blue);
@@ -218,7 +218,7 @@
   background: rgba(26, 54, 93, 0.06);
 }
 
-/* ── Step 3: Confirmation ── */
+/* Step 3: Confirmation */
 .confirmation-card {
   text-align: center;
   max-width: 520px;

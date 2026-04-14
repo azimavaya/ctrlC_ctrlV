@@ -1,9 +1,8 @@
-/**
- * Simulation.jsx — 14-day operations simulation page (admin-only).
- * Run the simulation day-by-day or all at once. Shows per-day stats
- * (flights, passengers, on-time %, delays, cancellations), aircraft lookup
- * with maintenance tracking (200-hour threshold), and reset capability.
- */
+// 14-day operations simulation page (admin-only).
+// Run the simulation day-by-day or all at once. Shows per-day stats
+// (flights, passengers, on-time %, delays, cancellations), aircraft lookup
+// with maintenance tracking (200-hour threshold), and reset capability.
+
 import { useState, useEffect, useCallback } from "react";
 import { useAuth } from "../context/AuthContext";
 import "./Simulation.css";
@@ -43,7 +42,7 @@ function otBadgeClass(pct) {
   return "sim-ot--bad";
 }
 
-// ── Main Component ───────────────────────────────────────────────────────────
+// Main Component
 export default function Simulation() {
   const { user, authFetch } = useAuth();
   const isAdmin = user?.role === "admin";
@@ -267,7 +266,7 @@ export default function Simulation() {
 
   const progressPct = Math.round((currentDay / SIM_DAYS) * 100);
 
-  // ── Render ──────────────────────────────────────────────────────────────────
+  // Render
   return (
     <div className="sim-page">
       {/* Header */}

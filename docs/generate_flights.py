@@ -1,18 +1,12 @@
 #!/usr/bin/env python3
-"""
-generate_flights.py
-PCA Day 1 Flight Schedule Generator
-CSC 4710 Spring 2026
-
-Outputs SQL INSERT statements for the `flights` table.
-Day 1 = 2026-03-09 (Monday, first day of simulation).
-US DST is active (sprang forward March 8, 2026).
-
-Rules applied:
-  - Operating speed = 80% of max airspeed
-  - Wind factor     = -0.045 * sin(heading_radians)  [eastbound faster, westbound slower]
-  - Flight time     = (dist_km / op_speed) * (1 + wind_factor)  [airborne only]
-  - Total block time= taxi_out + airborne + taxi_in
+# Generates SQL INSERTs for the Day 1 flight schedule (2026-03-09, Monday).
+# US DST is active (sprang forward March 8, 2026).
+#
+# Rules applied:
+#   - Operating speed = 80% of max airspeed
+#   - Wind factor     = -0.045 * sin(heading_radians)  [eastbound faster, westbound slower]
+#   - Flight time     = (dist_km / op_speed) * (1 + wind_factor)  [airborne only]
+#   - Total block time= taxi_out + airborne + taxi_in
   - Turnaround      = 40 min at hub, 50 min at non-hub
   - Fare            = max($75, $0.12 * distance_miles)
   - N350CA          = JFK→CDG only (evening departure, return next morning)

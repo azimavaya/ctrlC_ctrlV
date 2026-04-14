@@ -1,4 +1,4 @@
-/* ── Page shell ─────────────────────────────────────────────────── */
+/* Page shell */
 .sim-page { display: flex; flex-direction: column; gap: 1.25rem; }
 
 .sim-header {

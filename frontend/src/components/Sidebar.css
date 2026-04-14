@@ -1,4 +1,4 @@
-/* ── Width variables ── */
+/* Width variables */
 :root {
   --sidebar-closed: 64px;
   --sidebar-open:   240px;
@@ -22,7 +22,7 @@
 .sidebar--closed { width: var(--sidebar-closed); }
 .sidebar--open   { width: var(--sidebar-open); }
 
-/* ── Toggle button ── */
+/* Toggle button */
 .sidebar-toggle {
   display: flex;
   align-items: center;
@@ -44,7 +44,7 @@
 }
 .sidebar-toggle svg { width: 22px; height: 22px; }
 
-/* ── Nav ── */
+/* Nav */
 .sidebar-nav {
   flex: 1;
   padding: 0.75rem 0;
@@ -94,7 +94,7 @@
   text-overflow: ellipsis;
 }
 
-/* ── User block ── */
+/* User block */
 .sidebar-user {
   display: flex;
   align-items: center;
@@ -163,7 +163,7 @@
 }
 .sidebar-logout svg { width: 18px; height: 18px; }
 
-/* ── Backdrop (mobile) ── */
+/* Backdrop (mobile) */
 .sidebar-backdrop {
   display: none;
   position: fixed;

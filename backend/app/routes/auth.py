@@ -1,9 +1,7 @@
-"""
-auth.py — Authentication and user management endpoints.
+# Authentication and user management endpoints.
+# Handles login (with rate limiting and account lockout), current-user
+# lookup, and admin-only CRUD for user accounts and roles.
 
-Handles login (with rate limiting and account lockout), current-user lookup,
-and admin-only CRUD for user accounts and roles.
-"""
 import time
 import re
 from collections import defaultdict
@@ -14,7 +12,7 @@ from ..services.auth_service import check_password, hash_password, generate_toke
 
 auth_bp = Blueprint("auth", __name__)
 
-# ── Rate limiting (in-memory, per IP) ────────────────────────────────────────
+# Rate limiting (in-memory, per IP)
 _login_attempts = defaultdict(list)   # ip -> [timestamps]
 MAX_LOGIN_ATTEMPTS_PER_MIN = 10
 INPUT_MAX_LEN = 150
@@ -133,7 +131,7 @@ def me():
     return jsonify(user)
 
 
-# ── Admin-only: user management ──────────────────────────────────────────────
+# Admin-only: user management
 
 @auth_bp.route("/users", methods=["GET"])
 @role_required("admin")

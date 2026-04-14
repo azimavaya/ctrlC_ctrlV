@@ -1,14 +1,12 @@
-# ============================================================
-# Panther Cloud Air (PCA) — Makefile
+# Panther Cloud Air (PCA) Makefile
 # CSC 4710 Spring 2026 | ctrlC+ctrlV
-# ============================================================
 
 .PHONY: all setup start stop restart build logs clean frontend backend db help
 
 ## Default target
 all: help
 
-## ── Setup ────────────────────────────────────────────────────────────
+## Setup
 
 setup: ## Install all dependencies (run once)
 	@echo "==> Setting up frontend dependencies..."
@@ -17,7 +15,7 @@ setup: ## Install all dependencies (run once)
 	docker compose build --no-cache
 	@echo "==> Setup complete. Run 'make start' to launch."
 
-## ── Run ──────────────────────────────────────────────────────────────
+## Run
 
 start: ## Start all services (frontend, backend, database)
 	docker compose up -d
@@ -31,7 +29,7 @@ stop: ## Stop all services
 
 restart: stop start ## Restart all services
 
-## ── Development ──────────────────────────────────────────────────────
+## Development
 
 dev-frontend: ## Run frontend in dev mode (no Docker)
 	cd frontend && npm run dev
@@ -39,7 +37,7 @@ dev-frontend: ## Run frontend in dev mode (no Docker)
 dev-backend: ## Run backend in dev mode (no Docker; needs DB running)
 	cd backend && python run.py
 
-## ── Database ─────────────────────────────────────────────────────────
+## Database
 
 db: ## Start only the database
 	docker compose up -d db
@@ -52,7 +50,7 @@ db-reset: ## Drop and recreate the database (WARNING: destroys data)
 	docker compose up -d db
 	@echo "==> Database reset. Run 'make start' to restart all services."
 
-## ── Logs ─────────────────────────────────────────────────────────────
+## Logs
 
 logs: ## Show logs for all services
 	docker compose logs -f
@@ -63,7 +61,7 @@ logs-backend: ## Show backend logs only
 logs-db: ## Show database logs only
 	docker compose logs -f db
 
-## ── Project Tasks ────────────────────────────────────────────────────
+## Project Tasks
 
 timetable: ## Generate the Part 1 timetable (run after DB is up)
 	cd backend && python -m app.services.timetable
@@ -74,7 +72,7 @@ simulate: ## Run the 14-day simulation (Part 2)
 report: ## Print the financial report
 	@curl -s http://localhost:5001/api/simulation/report | python3 -m json.tool
 
-## ── Utilities ────────────────────────────────────────────────────────
+## Utilities
 
 build: ## Rebuild Docker images from scratch
 	docker compose build --no-cache

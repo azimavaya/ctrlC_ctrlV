@@ -77,9 +77,6 @@ standard rounding (0.5 rounds up, so 0.98M = 1 gate, 1.95M = 2 gates).
 **Monthly lease total:** $14,193,000
 **Maintenance:** Every 200 flight hours, 1.5 days, hub airports only, max 3 per hub.
 
-> **Note:** The aircraft model name "A200-100" matches the project specification exactly
-> (ProjectSpring2026.pdf: "12 Airbus A200-100 aircraft"). The spec is the authoritative
-> source for all naming — whatever the spec calls it is correct.
 
 ---
 
@@ -153,5 +150,3 @@ JFK↔LGA (10.6), ORD↔MDW (15.2), MIA↔FLL (20.9), BWI↔DCA (30.0), PHL↔BW
 | Admin | `/admin` | Admin | Users, aircraft, airports management |
 
 ---
-
-*Updated: April 2026 | Panther Cloud Air — PCA*

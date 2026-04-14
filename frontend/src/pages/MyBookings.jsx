@@ -1,8 +1,7 @@
-/**
- * MyBookings.jsx — Displays the current user's flight bookings.
- * Admins see all bookings (with "Booked By" column) and can delete any booking.
- * Regular users see only their own bookings with no delete option.
- */
+// Displays the current user's flight bookings.
+// Admins see all bookings (with "Booked By" column) and can delete any.
+// Regular users see only their own bookings with no delete option.
+
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import "./MyBookings.css";

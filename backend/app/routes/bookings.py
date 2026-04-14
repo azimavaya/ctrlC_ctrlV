@@ -1,7 +1,5 @@
-"""
-bookings.py
-Flight booking endpoints for all authenticated users.
-"""
+# Flight booking endpoints for all authenticated users.
+
 import re
 import random
 import string
@@ -51,7 +49,7 @@ def search_for_booking():
     db = get_db()
     cursor = db.cursor(dictionary=True)
 
-    # ── Direct flights: single-hop from origin to destination ─────────
+    # Direct flights: single-hop from origin to destination
     cursor.execute("""
         SELECT f.flight_id, f.flight_number, f.origin_iata, f.dest_iata,
                f.scheduled_departure, f.scheduled_arrival, f.fare_USD,
@@ -78,7 +76,7 @@ def search_for_booking():
 
     cursor.close()
 
-    # ── 1-stop connecting flights: origin -> hub -> destination ────────
+    # 1-stop connecting flights: origin -> hub -> destination.
     # Self-join flights where leg1's dest matches leg2's origin (the hub).
     # Layover must be 30-360 min per spec (minimum connect time to max wait).
     cursor = db.cursor(dictionary=True)
@@ -127,7 +125,7 @@ def search_for_booking():
 
     cursor.close()
 
-    # ── 2-stop connecting flights: origin -> hub1 -> hub2 -> destination
+    # 2-stop connecting flights: origin -> hub1 -> hub2 -> destination.
     # Triple self-join through two intermediate airports.
     cursor = db.cursor(dictionary=True)
     cursor.execute("""

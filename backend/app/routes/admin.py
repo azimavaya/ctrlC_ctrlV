@@ -1,7 +1,6 @@
-"""
-admin.py — Admin-only endpoints for schedule generation, dashboard overview,
-and live flight statistics.  All routes require the 'admin' role.
-"""
+# Admin-only endpoints: schedule generation, dashboard overview,
+# live flight stats. All routes require the 'admin' role.
+
 from datetime import datetime, timezone
 from flask import Blueprint, jsonify
 from ..db import get_db
@@ -32,7 +31,7 @@ def admin_overview():
     db = get_db()
     cur = db.cursor(dictionary=True)
 
-    # ── Aggregate counts ────────────────────────────────────────────
+    # Aggregate counts
     cur.execute("SELECT COUNT(*) as n FROM users")
     user_count = cur.fetchone()["n"]
     cur.execute("SELECT COUNT(*) as n FROM aircraft")
@@ -45,7 +44,7 @@ def admin_overview():
                 (_T_START, _T_END))
     flights_per_day = cur.fetchone()["n"]
 
-    # ── Full entity lists for the admin dashboard ─────────────────────
+    # Full entity lists for the admin dashboard
     cur.execute("""
         SELECT u.user_id, u.username, u.email, u.is_active,
                u.failed_login_attempts, u.locked_at,

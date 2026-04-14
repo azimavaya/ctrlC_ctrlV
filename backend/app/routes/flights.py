@@ -1,9 +1,7 @@
-"""
-flights.py — Public flight endpoints: timetable, search, live stats, fleet.
+# Public flight endpoints: timetable, search, live stats, fleet.
+# All queries scope to the template date range (2026-03-09) so the timetable
+# appears to repeat daily. Live stats map wall-clock time onto that date.
 
-All queries scope to the template date range (2026-03-09) so the timetable
-appears to repeat daily.  Live stats map wall-clock time onto that date.
-"""
 import re
 from datetime import datetime, timezone
 from flask import Blueprint, jsonify, request

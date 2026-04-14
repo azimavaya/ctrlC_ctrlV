@@ -1,8 +1,6 @@
-"""
-aircraft.py — REST endpoints for querying the PCA fleet.
+# REST endpoints for querying the PCA fleet.
+# List/detail views for individual aircraft and aircraft types.
 
-Provides list/detail views for individual aircraft and aircraft types.
-"""
 from flask import Blueprint, jsonify
 from ..db import get_db
 

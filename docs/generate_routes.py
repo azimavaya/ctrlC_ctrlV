@@ -1,15 +1,8 @@
 #!/usr/bin/env python3
-"""
-generate_routes.py
-Panther Cloud Air — Route and Aircraft SQL Generator
-CSC 4710 Spring 2026
-
-Computes:
-  1. Great-circle distance (miles + km) between all 31 airport pairs
-  2. Initial bearing (heading in degrees) for each route
-  3. Filters out routes < 150 miles
-  4. Outputs SQL INSERT statements for routes + aircraft tables
-"""
+# Generates SQL INSERTs for the routes and aircraft tables.
+# Computes great-circle distance (miles + km) and initial bearing
+# between all 31 airport pairs, drops routes under 150 miles, and
+# emits the INSERT statements to stdout.
 
 import math
 import itertools

@@ -1,17 +1,14 @@
-"""
-sim_runner.py — Panther Cloud Air 14-Day Simulation Runner (Part 2)
-
-Supports two modes:
-  1. run_all(db)      — Run all 14 days at once
-  2. run_day(db, day) — Run a single day
-
-Each day:
-  - Loads flights from the timetable for that date
-  - Applies the spec's fixed daily challenge via apply_day_challenge()
-  - Generates passenger demand via daily_demand()
-  - Computes financials (fuel, lease, landing fees, revenue)
-  - Populates simulation_flights, financials, airport_activity tables
-"""
+# 14-day simulation runner (Part 2).
+# Two modes:
+#   1. run_all(db)      - Run all 14 days at once
+#   2. run_day(db, day) - Run a single day
+#
+# Each day:
+#   - Loads flights from the timetable for that date
+#   - Applies the spec's fixed daily challenge via apply_day_challenge()
+#   - Generates passenger demand via daily_demand()
+#   - Computes financials (fuel, lease, landing fees, revenue)
+#   - Populates simulation_flights, financials, airport_activity tables
 import random
 import logging
 import os
@@ -27,7 +24,7 @@ SIM_DAYS = 14
 HUBS = ["ATL", "ORD", "DFW", "LAX"]
 
 
-# ── Public API ────────────────────────────────────────────────────────────────
+# Public API
 
 def reset_simulation(db):
     """Wipe all simulation data so a fresh run can start."""
@@ -90,7 +87,7 @@ def get_progress(db):
     return completed
 
 
-# ── Internal helpers ──────────────────────────────────────────────────────────
+# Internal helpers
 
 def _load_refs(db):
     """Load airports, aircraft, compute totals — cached per call."""
@@ -120,7 +117,7 @@ def _load_refs(db):
                     if ac["current_airport"] in HUBS and ac["tail_number"] != "N350CA"]
     failed_aircraft_id = rng.choice(hub_aircraft)["aircraft_id"] if hub_aircraft else None
 
-    # ── Maintenance tracking ──────────────────────────────────────────────
+    # Maintenance tracking
     # Load per-aircraft flight hours from simulation to track 200-hr maintenance.
     cur.execute("""
         SELECT f.aircraft_id, sf.sim_day,
@@ -416,12 +413,12 @@ def _simulate_day(db, day_num, refs):
         flight["scheduled_arrival"] = f["scheduled_arrival"] + day_offset
         flights.append(flight)
 
-    # ── Demand computation ────────────────────────────────────────────
+    # Demand computation
     flight_pax, direct_pax, connecting_groups = _compute_flight_passengers(
         flights, airports, total_metro,
     )
 
-    # ── Per-flight simulation loop ────────────────────────────────────
+    # Per-flight simulation loop
     insert_cur = db.cursor()
 
     day_passengers = 0
@@ -451,7 +448,7 @@ def _simulate_day(db, day_num, refs):
     for ac_id, ac in aircraft_map.items():
         aircraft_base[ac_id] = ac["current_airport"]
 
-    # ── Gate occupancy tracking ──────────────────────────────────────
+    # Gate occupancy tracking
     # Per spec: "If a flight lands at an airport and a gate is not available,
     # then the aircraft must wait on the tarmac."
     # Each gate tracks when it becomes free. Flights are assigned the earliest
@@ -578,7 +575,7 @@ def _simulate_day(db, day_num, refs):
             fuel_burn = float(ac.get("fuel_burn_L_per_hr", 2800))
             fuel_L = fuel_burn * flight_hrs
 
-        # ── Gate contention at destination airport ────────────────────
+        # Gate contention at destination airport
         # Per spec: passengers can only board/deplane at a gate. If no gate
         # is free when the aircraft arrives, it waits on the tarmac.
         # Gate occupancy = arrival time until departure (after turnaround).
@@ -709,7 +706,7 @@ def _simulate_day(db, day_num, refs):
             day_revenue += direct_count * float(flight["fare_USD"])
             day_passengers += direct_count  # unique direct passengers only (connecting added below)
 
-    # ── Connecting passengers (hub transfers) ─────────────────────────
+    # Connecting passengers (hub transfers)
     connecting_total = 0
     for cg in connecting_groups:
         l1 = cg["leg1_idx"]
@@ -768,7 +765,7 @@ def _simulate_day(db, day_num, refs):
     if connecting_total > 0:
         events.append(f"{connecting_total} connecting passengers via hubs")
 
-    # ── Rebooking: move stranded passengers to alternate flights ──────
+    # Rebooking: move stranded passengers to alternate flights
     # Collect cancelled flights that had potential passengers
     rebooked_count = 0
     if cancelled_count > 0:
@@ -859,7 +856,7 @@ def _simulate_day(db, day_num, refs):
     if gate_wait_count > 0:
         events.append(f"{gate_wait_count} flights waited on tarmac (no gate available)")
 
-    # ── Financial summary for this day ────────────────────────────────
+    # Financial summary for this day
     # Lease is a fixed daily cost regardless of flights operated
     daily_lease = sum(float(ac["monthly_lease_USD"]) for ac in aircraft_map.values()) / 30
     total_day_costs = day_fuel_cost + daily_lease + day_landing_cost

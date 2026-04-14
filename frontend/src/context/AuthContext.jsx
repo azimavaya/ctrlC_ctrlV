@@ -1,8 +1,7 @@
-/**
- * AuthContext.jsx — Provides authentication state to the entire app.
- * Manages JWT token storage in localStorage, login/logout actions,
- * and an authFetch helper that auto-attaches the Bearer token to API requests.
- */
+// Provides authentication state to the entire app.
+// Manages JWT token storage in localStorage, login/logout actions, and an
+// authFetch helper that auto-attaches the Bearer token to API requests.
+
 import { createContext, useContext, useState, useEffect } from "react";
 
 const AuthContext = createContext(null);
@@ -30,7 +29,7 @@ export function AuthProvider({ children }) {
         setUser({ username: data.username, role: data.role_name });
       })
       .catch(() => {
-        // Token invalid/expired — clear it
+        // Token invalid/expired, clear it
         localStorage.removeItem(TOKEN_KEY);
         localStorage.removeItem(USER_KEY);
         setToken(null);
@@ -83,5 +82,5 @@ export function AuthProvider({ children }) {
   );
 }
 
-/** Custom hook — shorthand for consuming AuthContext from any component */
+// Shorthand for consuming AuthContext from any component
 export const useAuth = () => useContext(AuthContext);

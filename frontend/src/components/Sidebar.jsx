@@ -121,7 +121,7 @@ export default function Sidebar({ open, onToggle }) {
           ))}
         </nav>
 
-        {/* ── User block ── */}
+        {/* User block */}
         <div className="sidebar-user">
           <div className="sidebar-avatar" style={{ background: roleColor }}>
             {initials}

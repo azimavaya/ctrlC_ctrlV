@@ -1,9 +1,7 @@
-"""
-__init__.py — Application factory for Panther Cloud Air (PCA).
+# Flask application factory.
+# Builds the app, registers all blueprints, and seeds the admin user
+# and flight schedule on first startup.
 
-Creates and configures the Flask app, registers all blueprints,
-and seeds the admin user and flight schedule on first startup.
-"""
 import datetime
 import decimal
 import time
@@ -17,7 +15,7 @@ from .db import init_db
 log = logging.getLogger(__name__)
 
 
-# ── Custom JSON serializer ──────────────────────────────────────────────────
+# Custom JSON serializer
 
 class PCAJSONProvider(DefaultJSONProvider):
     """Handle MariaDB types that the default Flask serializer cannot encode."""
@@ -90,7 +88,7 @@ def _seed_admin(app):
     log.error("Could not seed admin user — DB never became ready.")
 
 
-# ── Application factory ─────────────────────────────────────────────────────
+# Application factory
 
 def create_app():
     """Build and return a fully configured Flask application instance."""
@@ -105,7 +103,7 @@ def create_app():
     # Register the DB connection teardown hook
     init_db(app)
 
-    # ── Blueprint registration ──────────────────────────────────────────
+    # Blueprint registration
     from .routes.airports   import airports_bp
     from .routes.aircraft   import aircraft_bp
     from .routes.flights    import flights_bp
@@ -128,7 +126,7 @@ def create_app():
     def health():
         return {"status": "ok", "message": "Panther Cloud Air API running"}
 
-    # ── Startup tasks ────────────────────────────────────────────────────
+    # Startup tasks.
     # Seed admin synchronously so login works as soon as the app is up.
     # Schedule generation runs in a background thread (takes ~15 s).
     _seed_admin(app)

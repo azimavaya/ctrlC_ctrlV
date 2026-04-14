@@ -184,7 +184,7 @@ export default function BookFlight() {
         </div>
       </div>
 
-      {/* ── STEP 1: Flight Selection ── */}
+      {/* STEP 1: Flight Selection */}
       {step === 1 && (
         <>
           <div className="card">
@@ -366,7 +366,7 @@ export default function BookFlight() {
         </>
       )}
 
-      {/* ── STEP 2: Passenger Details ── */}
+      {/* STEP 2: Passenger Details */}
       {step === 2 && selectedFlight && (
         <>
           <div className="card booking-summary-mini">
@@ -452,7 +452,7 @@ export default function BookFlight() {
         </>
       )}
 
-      {/* ── STEP 3: Confirmation ── */}
+      {/* STEP 3: Confirmation */}
       {step === 3 && booking && (
         <div className="card confirmation-card">
           <div className="confirm-icon">

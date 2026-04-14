@@ -1,13 +1,8 @@
-"""
-scheduler.py — Panther Cloud Air Flight Schedule Generator (Part 1)
-
-Generates a daily flight schedule for 56 aircraft across 31 airports
-using a hub-and-spoke model with 4 hubs (ATL, ORD, DFW, LAX).
-
-Each aircraft performs round-trip flights from its base airport throughout
-the operating day (5:00 AM – 1:00 AM local time).  The same flight numbers
-repeat every calendar day.
-"""
+# Flight schedule generator (Part 1).
+# Generates a daily schedule for 56 aircraft across 31 airports using a
+# hub-and-spoke model with 4 hubs (ATL, ORD, DFW, LAX). Each aircraft does
+# round-trips from its base airport during the operating day (5:00 AM –
+# 1:00 AM local time). Same flight numbers repeat every calendar day.
 
 from datetime import datetime, timedelta, date as date_type
 from zoneinfo import ZoneInfo
@@ -56,7 +51,7 @@ SPOKE_HUB_MAP = {
 }
 
 
-# ── Public API ───────────────────────────────────────────────────────────────
+# Public API
 
 TEMPLATE_DATE = date_type(2026, 3, 9)   # reference date — Day 1 per spec (DST active)
 
@@ -91,7 +86,7 @@ def generate_schedule(db):
     return len(day_flights) if day_flights else 0
 
 
-# ── Data loaders ─────────────────────────────────────────────────────────────
+# Data loaders
 
 def _load_airports(db):
     cur = db.cursor(dictionary=True)
@@ -117,7 +112,7 @@ def _load_aircraft_types(db):
     return {r["type_id"]: r for r in cur.fetchall()}
 
 
-# ── Assignment builder ───────────────────────────────────────────────────────
+# Assignment builder
 
 def _build_assignments(aircraft_list, airports, routes, ac_types):
     """Decide what destinations each aircraft visits in a day."""
@@ -181,7 +176,7 @@ def _nearest_hub(airport_iata, routes):
     return best
 
 
-# ── Day generator ────────────────────────────────────────────────────────────
+# Day generator
 
 def _generate_day(assignments, current_date, airports, routes):
     """Produce every flight for a single calendar day."""
@@ -233,13 +228,13 @@ def _plan_aircraft_day(asn, current_date, airports, routes, flight_num):
     while cycle < max_cycles and dests:
         dest_iata = dests[cycle % len(dests)]
 
-        # ── outbound: base → dest ──
+        # outbound: base -> dest
         out = _make_leg(base, dest_iata, current_utc, current_date,
                         ac, ac_type, airports, routes, flight_num, is_intl)
         if out is None:
             break
 
-        # ── return:   dest → base ──
+        # return: dest -> base
         needs_fuel_out = float(routes[(base, dest_iata)]["distance_miles"]) > 800
         turnaround_out = (Config.GATE_TURNOVER_WITH_FUEL_MIN
                           if needs_fuel_out else Config.GATE_TURNOVER_MIN)
@@ -329,7 +324,7 @@ def _make_leg(origin, dest, depart_utc, current_date,
     }
 
 
-# ── Fare recomputation ───────────────────────────────────────────────────────
+# Fare recomputation
 
 def _recompute_fares(day_flights, ac_types, airports, routes):
     """
@@ -375,7 +370,7 @@ def _recompute_fares(day_flights, ac_types, airports, routes):
     return day_flights
 
 
-# ── DB insert ────────────────────────────────────────────────────────────────
+# DB insert
 
 def _insert_flights(db, flights):
     """Bulk-insert all generated flights into the flights table."""

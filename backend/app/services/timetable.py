@@ -1,20 +1,17 @@
-"""
-timetable.py — Panther Cloud Air Part 1 Core Flight Logic
+# Part 1 core flight logic.
+# Physics/math functions needed to build the daily timetable and compute fares:
+#   - Great-circle distance (haversine)
+#   - Initial compass bearing
+#   - Wind time factor (+/- 4.5% east/west per project spec)
+#   - Cruising altitude selection by distance
+#   - Full flight time (taxi, takeoff, climb, cruise, descent, landing)
+#   - Taxi time formulas (hub vs non-hub)
+#   - Fare calculation at 30% load factor break-even
 
-Provides all the physics/math functions needed to build the daily
-timetable and compute fares:
-  - Great-circle distance (haversine)
-  - Initial compass bearing
-  - Wind time factor (±4.5% east/west per project spec)
-  - Cruising altitude selection by distance
-  - Full flight time calculation (taxi, takeoff, climb, cruise, descent, landing)
-  - Taxi time formulas (hub vs non-hub)
-  - Fare calculation at 30% load factor break-even
-"""
 import math
 from ..config import Config
 
-# ── Great Circle Distance ────────────────────────────────────────────────────
+# Great Circle Distance
 
 def great_circle_distance_miles(lat1, lon1, lat2, lon2):
     """Return distance in miles between two GPS coordinates using the haversine formula."""
@@ -28,7 +25,7 @@ def great_circle_distance_miles(lat1, lon1, lat2, lon2):
 def great_circle_distance_km(lat1, lon1, lat2, lon2):
     return great_circle_distance_miles(lat1, lon1, lat2, lon2) * 1.60934
 
-# ── Bearing / Heading ────────────────────────────────────────────────────────
+# Bearing / Heading
 
 def bearing_degrees(lat1, lon1, lat2, lon2):
     """
@@ -42,7 +39,7 @@ def bearing_degrees(lat1, lon1, lat2, lon2):
     bearing = math.degrees(math.atan2(x, y))
     return (bearing + 360) % 360
 
-# ── Wind Effect ──────────────────────────────────────────────────────────────
+# Wind Effect
 
 def wind_time_factor(heading_deg):
     """
@@ -59,7 +56,7 @@ def wind_time_factor(heading_deg):
     # Positive cos → heading toward East → reduce time
     return 1.0 - effect
 
-# ── Cruising Altitude ────────────────────────────────────────────────────────
+# Cruising Altitude
 
 def cruising_altitude_ft(distance_miles, is_international=False):
     """Select cruising altitude based on route distance (longer routes fly higher)."""
@@ -73,7 +70,7 @@ def cruising_altitude_ft(distance_miles, is_international=False):
         return 25000
     return 20000
 
-# ── Flight Time Calculation ──────────────────────────────────────────────────
+# Flight Time Calculation
 
 KNOTS_TO_KMH = 1.852
 
@@ -160,7 +157,7 @@ def compute_flight_time_minutes(distance_km, max_speed_kmh, heading_deg, is_inte
 
     return total_flight_min
 
-# ── Taxi Time ────────────────────────────────────────────────────────────────
+# Taxi Time
 
 def taxi_time_minutes(metro_pop_M, is_hub):
     """Estimate taxi time based on airport size (hub vs spoke, metro population)."""
@@ -171,7 +168,7 @@ def taxi_time_minutes(metro_pop_M, is_hub):
     else:
         return min(13, math.floor(metro_pop_M * 7.5))
 
-# ── Fare Calculation ─────────────────────────────────────────────────────────
+# Fare Calculation
 
 def compute_fare(distance_miles, aircraft_capacity, fuel_burn_L_per_hr, flight_time_min,
                  monthly_lease_USD, is_international=False, flights_per_day=None,

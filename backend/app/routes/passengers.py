@@ -1,8 +1,6 @@
-"""
-passengers.py — Passenger detail endpoint for the simulation.
+# Passenger detail endpoint for the simulation.
+# Returns a passenger's full itinerary (all flight legs) from simulation data.
 
-Returns a passenger's full itinerary (all flight legs) from simulation data.
-"""
 from flask import Blueprint, jsonify, request
 from ..db import get_db
 from ..middleware import token_required

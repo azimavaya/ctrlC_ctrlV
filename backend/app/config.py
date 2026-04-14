@@ -1,20 +1,17 @@
-"""
-config.py — Centralized configuration for the PCA Flask application.
+# Configuration for the PCA Flask app. All values come from env vars
+# with dev defaults. Business constants are from the CSC 4710 project spec.
 
-All values come from environment variables with sensible dev defaults.
-Business constants are drawn from the CSC 4710 project specification.
-"""
 import os
 from dotenv import load_dotenv
 
 load_dotenv()
 
 class Config:
-    # ── JWT / Authentication ────────────────────────────────────────────
+    # JWT / Authentication
     JWT_SECRET       = os.getenv("JWT_SECRET",      "pca-jwt-secret-change-in-prod")
     JWT_EXPIRY_HOURS = int(os.getenv("JWT_EXPIRY_HOURS", 8))
 
-    # ── Database connection ────────────────────────────────────────────
+    # Database connection
     DB_HOST     = os.getenv("DB_HOST",     "localhost")
     DB_PORT     = int(os.getenv("DB_PORT", 3306))
     DB_NAME     = os.getenv("DB_NAME",     "pca_db")
@@ -23,13 +20,13 @@ class Config:
     FLASK_ENV   = os.getenv("FLASK_ENV",   "development")
     DEBUG       = FLASK_ENV == "development"
 
-    # Admin seed credentials — override via env var in production
+    # Admin seed credentials, override via env var in production
     ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "pca")
 
-    # CORS — restrict to frontend origin in production
+    # CORS: restrict to frontend origin in production
     CORS_ORIGINS = os.getenv("CORS_ORIGINS", "http://localhost:3000")
 
-    # ── PCA Business Constants (from project spec) ────────────────────
+    # PCA Business Constants (from project spec)
 
     # Fuel pricing
     FUEL_PRICE_USD_PER_GALLON    = 6.19

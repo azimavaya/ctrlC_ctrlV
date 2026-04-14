@@ -1,8 +1,6 @@
-/**
- * main.jsx — Application entry point for Panther Cloud Air.
- * Mounts the React app into the DOM with React Router (BrowserRouter)
- * and StrictMode enabled for development warnings.
- */
+// App entry point for Panther Cloud Air.
+// Mounts the React app with React Router (BrowserRouter) and StrictMode.
+
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";

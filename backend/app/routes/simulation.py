@@ -1,10 +1,7 @@
-"""
-simulation.py — 14-day simulation endpoints (admin-only).
+# 14-day simulation endpoints (admin-only).
+# Provides run/reset/progress, per-day flight data, the final financial
+# report, aircraft history by tail number, and EUR/USD exchange rate info.
 
-Provides run/reset/progress for the simulation, per-day flight data,
-the final financial report, aircraft history by tail number, and
-EUR/USD exchange rate info.
-"""
 import re
 from flask import Blueprint, jsonify, request
 from ..db import get_db

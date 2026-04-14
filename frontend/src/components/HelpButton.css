@@ -1,4 +1,4 @@
-/* ── Floating action button ── */
+/* Floating action button */
 .help-container {
   position: fixed;
   bottom: 1.5rem;
@@ -30,14 +30,14 @@
   background: #14304f;
 }
 
-/* ── Backdrop ── */
+/* Backdrop */
 .help-backdrop {
   position: fixed;
   inset: 0;
   z-index: 999;
 }
 
-/* ── Help panel ── */
+/* Help panel */
 .help-panel {
   position: absolute;
   bottom: 60px;
@@ -109,7 +109,7 @@
   margin-bottom: 0.4rem;
 }
 
-/* ── Responsive ── */
+/* Responsive */
 @media (max-width: 480px) {
   .help-panel {
     width: calc(100vw - 2rem);

@@ -1,9 +1,8 @@
-/**
- * AdminDashboard.jsx — Admin control panel (admin-only).
- * Tabs: Overview stats, live operations panel, user management (CRUD + unlock),
- * aircraft table with specs/maintenance info, airport table sortable by IATA/hub.
- * Live stats auto-refresh every 60 seconds.
- */
+// Admin control panel (admin-only).
+// Tabs: Overview stats, live operations panel, user management (CRUD + unlock),
+// aircraft table with specs/maintenance info, airport table sortable by IATA/hub.
+// Live stats auto-refresh every 60 seconds.
+
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import "./AdminDashboard.css";

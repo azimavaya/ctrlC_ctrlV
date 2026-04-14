@@ -1,7 +1,5 @@
-"""
-auth_service.py
-Password hashing (bcrypt) and JWT token utilities.
-"""
+# Password hashing (bcrypt) and JWT token utilities.
+
 import datetime
 import bcrypt
 import jwt

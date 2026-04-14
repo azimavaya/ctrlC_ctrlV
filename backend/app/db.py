@@ -1,9 +1,7 @@
-"""
-db.py — Database connection management for the PCA Flask application.
+# Database connection management.
+# Uses Flask's app-context (flask.g) to provide one connection per request
+# and close it automatically on teardown.
 
-Uses Flask's application-context lifecycle (flask.g) to provide one
-connection per request and close it automatically on teardown.
-"""
 import mysql.connector
 from flask import g, current_app
 

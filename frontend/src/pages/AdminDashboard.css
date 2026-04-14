@@ -1,4 +1,4 @@
-/* ── AdminDashboard.css — Stats, tabs, user management, live ops panel ── */
+/* Stats, tabs, user management, live ops panel */
 .admin-dashboard { display: flex; flex-direction: column; gap: 1.5rem; }
 .ad-table-scroll { overflow-x: auto; }
 

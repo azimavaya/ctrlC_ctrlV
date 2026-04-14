@@ -1,16 +1,13 @@
-"""
-simulation.py — Panther Cloud Air Part 2 Daily Challenge Logic
+# Part 2 daily challenge logic.
+# Each sim day (1-14) has a fixed challenge from the project spec. Provides:
+#   - apply_day_challenge(): delay/cancellation info for a single flight
+#   - daily_demand(): passenger demand between two airports
 
-Each simulation day (1–14) has a fixed challenge defined in the project spec.
-This module provides:
-  - apply_day_challenge() — returns delay/cancellation info for a single flight
-  - daily_demand() — computes passenger demand between two airports
-"""
 import random
 import math
 from .timetable import wind_time_factor, bearing_degrees
 
-# ── Day Challenge Handlers ────────────────────────────────────────────────────
+# Day Challenge Handlers
 
 def apply_day_challenge(day, flight, origin_lat, origin_lon, dest_lat, dest_lon):
     """
@@ -77,7 +74,7 @@ def apply_day_challenge(day, flight, origin_lat, origin_lon, dest_lat, dest_lon)
 
     return {"delay_minutes": delay_minutes, "reason": reason, "cancelled": False, "delay_type": delay_type}
 
-# ── Passenger Demand ─────────────────────────────────────────────────────────
+# Passenger Demand
 
 def daily_demand(source_metro_M, dest_metro_M, all_airports_total_M,
                  market_share=0.02, travel_rate=0.005):

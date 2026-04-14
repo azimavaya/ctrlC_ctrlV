@@ -1,9 +1,6 @@
-"""
-run.py — Flask application entry point for Panther Cloud Air (PCA).
-CSC 4710 Software Engineering, Spring 2026 — Team ctrlC+ctrlV.
+# Flask entry point for Panther Cloud Air.
+# Starts the dev server on port 5000 with hot-reload enabled.
 
-Starts the development server on port 5000 with hot-reload enabled.
-"""
 from app import create_app
 
 app = create_app()

@@ -1,9 +1,8 @@
-/**
- * Login.jsx — Sign-in page for Panther Cloud Air.
- * Features: username/password form, account lockout detection,
- * password visibility toggle, forgot-password flow (UI only),
- * and a high-contrast accessibility mode.
- */
+// Sign-in page for Panther Cloud Air.
+// Features: username/password form, account lockout detection, password
+// visibility toggle, forgot-password flow (UI only), and a high-contrast
+// accessibility mode.
+
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";

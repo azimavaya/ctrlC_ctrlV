@@ -1,4 +1,4 @@
-/* ── Hero ── */
+/* Hero */
 .home-hero {
   display: flex;
   align-items: center;
@@ -44,7 +44,7 @@
   font-style: italic;
 }
 
-/* ── Timezone toggle ─── */
+/* Timezone toggle */
 .home-tz-toggle {
   display: inline-flex;
   gap: 0;
@@ -105,7 +105,7 @@
   margin-top: 0.2rem;
 }
 
-/* ── Hero live strip ───────────────────────────────────────────── */
+/* Hero live strip */
 .home-live-strip {
   display: flex;
   align-items: center;
@@ -148,7 +148,7 @@
   white-space: nowrap;
 }
 
-/* ── Live in-air / next departures tables ─────────────────────── */
+/* Live in-air / next departures tables */
 .home-live-tables {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -229,7 +229,7 @@
 .pill--green { background: #d1fae5; color: #065f46; }
 .pill--red   { background: #fee2e2; color: #991b1b; }
 
-/* ── Quick-access cards ─────────────────────────────────────────── */
+/* Quick-access cards */
 .home-cards {
   display: flex;
   gap: 1.25rem;
@@ -272,7 +272,7 @@
   .home-cards { flex-wrap: wrap; }
 }
 
-/* ── Info Panel Modal ─────────────────────────────────────────── */
+/* Info Panel Modal */
 .info-overlay {
   position: fixed; inset: 0; z-index: 1000;
   background: rgba(0,0,0,0.5); display: flex;

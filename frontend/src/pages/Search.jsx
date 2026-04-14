@@ -1,8 +1,7 @@
-/**
- * Search.jsx — Read-only flight search page (no booking).
- * Lets any logged-in user search for direct and connecting flights
- * by origin, destination, and date. Results are displayed in tables.
- */
+// Read-only flight search page (no booking).
+// Lets any logged-in user search for direct and connecting flights by
+// origin, destination, and date. Results are displayed in tables.
+
 import { useState, useEffect } from "react";
 import "./Search.css";
 
