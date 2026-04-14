@@ -1,6 +1,9 @@
+// Bring in helper function to define Vite config for React
 import { defineConfig } from "vite";
+// Bring in the React plugin for Vite
 import react from "@vitejs/plugin-react";
 
+// Define the Vite config
 export default defineConfig({
   plugins: [react()],
   server: {
