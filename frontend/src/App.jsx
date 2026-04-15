@@ -30,9 +30,6 @@ import "./App.css";
  * Shared page chrome: collapsible sidebar, main content slot, footer, and the
  * floating help button. Sidebar open/closed state lives here (not in a
  * context) because no other component needs to read or toggle it.
- *
- * The layout-body class toggles between --open and --closed so CSS can shift
- * the content area to account for the sidebar width.
  */
 function Layout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -58,14 +55,6 @@ function Layout({ children }) {
  *   - Public        : /login (no auth required)
  *   - Authenticated : any logged-in user (admin OR user role)
  *   - Admin-only    : ProtectedRoute with roles={["admin"]}
- *
- * /unauthorized is rendered inside the Layout so a user who hits a page they
- * lack permission for still sees the sidebar and can navigate away, rather
- * than landing on a bare error screen.
- *
- * The catch-all "*" route redirects unknown URLs to "/" instead of showing a
- * 404. Since "/" is itself protected, unauthenticated users get bounced to
- * /login by ProtectedRoute — so a bad URL never leaks app structure.
  */
 export default function App() {
   return (

@@ -15,7 +15,6 @@ Airline simulation system for Panther Cloud Air — 56 aircraft, 310 daily fligh
 | Orchestration | Docker Compose |
 | Auth | JWT (HS256) + bcrypt |
 | Version Control | GitHub (private) |
-| Project Mgmt | Monday.com / Trello |
 
 ---
 
