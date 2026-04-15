@@ -196,7 +196,8 @@ make start          # Start all services
 make stop           # Stop all services
 make dev-frontend   # Run React dev server without Docker
 make dev-backend    # Run Flask without Docker (needs DB running)
-make db-shell       # Open MariaDB shell
+make db-shell       # Open MariaDB shell 
+Hashes: (SELECT username, password_hash FROM users;)
 make db-reset       # Reset database (destroys all data)
 make logs           # Follow all logs
 make timetable      # Generate Part 1 timetable
