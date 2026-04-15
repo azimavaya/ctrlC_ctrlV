@@ -137,7 +137,15 @@ pca/
 │       ├── models/       # Data models
 │       └── services/     # Timetable & simulation logic
 ├── database/
-│   └── init.sql          # Schema + seed data
+│   ├── 00_init.sql       # Create database
+│   ├── 01_roles_users.sql
+│   ├── 02_airports.sql
+│   ├── 03_aircraft.sql
+│   ├── 04_routes.sql
+│   ├── 05_flights.sql
+│   ├── 06_simulation.sql
+│   ├── 07_bookings.sql
+│   └── 08_indexes.sql    # (run in numeric order by MariaDB)
 ├── docs/
 │   ├── PCA_MASTER_REFERENCE.md  # Consolidated technical reference
 │   ├── SECURITY_COMPLIANCE.md   # Security compliance documentation
@@ -213,7 +221,7 @@ If the database gets into a bad state (schema errors, missing tables, stale data
 ```bash
 make db-reset
 ```
-This runs `docker compose down -v` (removes containers **and** the database volume), then restarts the DB container fresh. The `init.sql` script will re-run automatically, recreating all tables and seed data from scratch.
+This runs `docker compose down -v` (removes containers **and** the database volume), then restarts the DB container fresh. The `database/*.sql` scripts will re-run automatically in numeric order (`00_init.sql` → `08_indexes.sql`), recreating all tables and seed data from scratch.
 
 After the reset, restart everything:
 ```bash

@@ -1,0 +1,2 @@
+CREATE DATABASE IF NOT EXISTS pca_db;
+USE pca_db;

@@ -12,7 +12,7 @@ services:
     # Only the backend service (same pca_network) can reach port 3306
     volumes:
       - db_data:/var/lib/mysql
-      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./database:/docker-entrypoint-initdb.d
     networks:
       - pca_network
 
