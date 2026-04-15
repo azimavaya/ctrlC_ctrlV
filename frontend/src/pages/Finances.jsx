@@ -5,7 +5,6 @@
 
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import "./Finances.css";
 
 const EUR_RATE = 1.08; // 1 EUR = 1.08 USD (xe.com Jan 31, 2026)
 

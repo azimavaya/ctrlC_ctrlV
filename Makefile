@@ -61,17 +61,6 @@ logs-backend: ## Show backend logs only
 logs-db: ## Show database logs only
 	docker compose logs -f db
 
-## Project Tasks
-
-timetable: ## Generate the Part 1 timetable (run after DB is up)
-	cd backend && python -m app.services.timetable
-
-simulate: ## Run the 14-day simulation (Part 2)
-	cd backend && python -m app.services.simulation
-
-report: ## Print the financial report
-	@curl -s http://localhost:5001/api/simulation/report | python3 -m json.tool
-
 ## Utilities
 
 build: ## Rebuild Docker images from scratch

@@ -3,7 +3,6 @@
 // origin, destination, and date. Results are displayed in tables.
 
 import { useState, useEffect } from "react";
-import "./Search.css";
 
 const API = "/api";
 

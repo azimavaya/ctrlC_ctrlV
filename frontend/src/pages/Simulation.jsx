@@ -5,7 +5,6 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { useAuth } from "../context/AuthContext";
-import "./Simulation.css";
 
 const SIM_DAYS = 14; // total days in the simulation period (March 9-22, 2026)
 

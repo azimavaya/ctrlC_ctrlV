@@ -1,11 +1,9 @@
 // Admin control panel (admin-only).
-// Tabs: Overview stats, live operations panel, user management (CRUD + unlock),
-// aircraft table with specs/maintenance info, airport table sortable by IATA/hub.
-// Live stats auto-refresh every 60 seconds.
+// Tabs: aircraft table with specs/maintenance info, airport table sortable by IATA/hub,
+// user management (CRUD + unlock).
 
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import "./AdminDashboard.css";
 
 const API = "/api";
 
@@ -36,18 +34,12 @@ function StatusBadge({ status }) {
   );
 }
 
-function fmtTime(dt) {
-  if (!dt) return "—";
-  return new Date(dt).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: true });
-}
-
 export default function AdminDashboard() {
   const { token } = useAuth();
   const [data, setData]       = useState(null);
-  const [live, setLive]       = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError]     = useState(null);
-  const [tab, setTab]         = useState("users");
+  const [tab, setTab]         = useState("aircraft");
 
   const [airportSort, setAirportSort] = useState("iata");
   const [showCreateUser, setShowCreateUser] = useState(false);
@@ -64,22 +56,7 @@ export default function AdminDashboard() {
       .catch(() => { setError("Failed to load admin data"); setLoading(false); });
   };
 
-  const loadLive = () => {
-    fetch(`${API}/admin/live-stats`, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then(r => r.json())
-      .then(d => setLive(d))
-      .catch(() => {});
-  };
-
-  useEffect(() => { loadData(); loadLive(); }, [token]);
-
-  // Refresh live stats every 60 seconds
-  useEffect(() => {
-    const id = setInterval(loadLive, 60_000);
-    return () => clearInterval(id);
-  }, [token]);
+  useEffect(() => { loadData(); }, [token]);
 
   const deleteUser = (user_id, username) => {
     if (!window.confirm(`Delete user "${username}"? This cannot be undone.`)) return;
@@ -144,103 +121,12 @@ export default function AdminDashboard() {
         <StatCard label="Daily Flights" value={stats.flights_per_day} accent="#ef4444" />
       </div>
 
-      {/* Live operations panel */}
-      {live && (
-        <div className="ad-live-panel">
-          <div className="ad-live-header">
-            <span className="ad-live-title">
-              <span className="ad-live-dot" />
-              Live Operations — {new Date(live.server_utc).toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" })}
-            </span>
-            <span className="ad-live-time">
-              UTC {new Date(live.server_utc).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: false, timeZone: "UTC" })}
-              &nbsp;·&nbsp;Updates every 60s
-            </span>
-          </div>
-
-          <div className="ad-live-stats">
-            <div className="ad-live-stat">
-              <span className="ad-live-stat-value total">{live.total_today}</span>
-              <span className="ad-live-stat-label">Total Today</span>
-            </div>
-            <div className="ad-live-stat">
-              <span className="ad-live-stat-value in-air">{live.in_air}</span>
-              <span className="ad-live-stat-label">In the Air</span>
-            </div>
-            <div className="ad-live-stat">
-              <span className="ad-live-stat-value completed">{live.completed}</span>
-              <span className="ad-live-stat-label">Completed</span>
-            </div>
-            <div className="ad-live-stat">
-              <span className="ad-live-stat-value remaining">{live.remaining}</span>
-              <span className="ad-live-stat-label">Remaining</span>
-            </div>
-          </div>
-
-          {/* Progress bar */}
-          {live.total_today > 0 && (() => {
-            const compPct = (live.completed / live.total_today) * 100;
-            const airPct = (live.in_air / live.total_today) * 100;
-            return (
-              <div className="ad-live-progress">
-                <div style={{ display: "flex", height: "100%" }}>
-                  <div className="ad-live-bar ad-live-bar-completed" style={{ width: compPct + "%" }} />
-                  <div className="ad-live-bar ad-live-bar-inair" style={{ width: airPct + "%" }} />
-                </div>
-              </div>
-            );
-          })()}
-
-          <div className="ad-live-tables">
-            {live.in_air_flights && live.in_air_flights.length > 0 && (
-              <div className="ad-live-section">
-                <h4>Currently In the Air ({live.in_air})</h4>
-                <table>
-                  <thead>
-                    <tr><th>Flight</th><th>Route</th><th>Tail #</th><th>ETA</th></tr>
-                  </thead>
-                  <tbody>
-                    {live.in_air_flights.map((f, i) => (
-                      <tr key={i}>
-                        <td><strong>{f.flight_number}</strong></td>
-                        <td>{f.origin_iata} → {f.dest_iata}</td>
-                        <td>{f.tail_number}</td>
-                        <td>{fmtTime(f.scheduled_arrival)}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
-            {live.next_departures && live.next_departures.length > 0 && (
-              <div className="ad-live-section">
-                <h4>Next Departures</h4>
-                <table>
-                  <thead>
-                    <tr><th>Flight</th><th>Route</th><th>Departs</th></tr>
-                  </thead>
-                  <tbody>
-                    {live.next_departures.map((f, i) => (
-                      <tr key={i}>
-                        <td><strong>{f.flight_number}</strong></td>
-                        <td>{f.origin_iata} → {f.dest_iata}</td>
-                        <td>{fmtTime(f.scheduled_departure)}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
-
       {/* Tab navigation */}
       <div className="ad-tabs">
         {[
-          { key: "users",    label: `Users (${users.length})` },
           { key: "aircraft", label: `Aircraft (${aircraft.length})` },
           { key: "airports", label: `Airports (${airports.length})` },
+          { key: "users",    label: `Users (${users.length})` },
         ].map(t => (
           <button
             key={t.key}

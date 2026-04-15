@@ -6,7 +6,6 @@ __pycache__/
 .Python
 env/
 venv/
-.env
 *.egg-info/
 dist/
 build/
@@ -14,7 +13,6 @@ build/
 # Node / React
 node_modules/
 frontend/dist/
-frontend/.env
 .npm
 
 # Docker

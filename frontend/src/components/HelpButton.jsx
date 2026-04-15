@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import "./HelpButton.css";
 
 export default function HelpButton() {
   const [open, setOpen] = useState(false);

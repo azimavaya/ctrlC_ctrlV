@@ -2,9 +2,6 @@
 # with dev defaults. Business constants are from the CSC 4710 project spec.
 
 import os
-from dotenv import load_dotenv
-
-load_dotenv()
 
 class Config:
     # JWT / Authentication
@@ -40,23 +37,15 @@ class Config:
     GATE_TURNOVER_MIN            = 40
     GATE_TURNOVER_WITH_FUEL_MIN  = 50
     TRANSIT_MIN_MINUTES          = 30
-    DOOR_CLOSE_BEFORE_DEP_MIN    = 15
-    AIRPORT_OPEN_LOCAL           = "05:00"
-    AIRPORT_CLOSE_LOCAL          = "01:00"
     # Demand and market parameters
     WIND_EFFECT_PCT              = 0.045   # 4.5% E/W wind adjustment
     DAILY_AIR_TRAVEL_PCT         = 0.005   # 0.5% of population travels by air/day
     INITIAL_MARKET_SHARE_PCT     = 0.02    # 2% market share initially
-    TARGET_MARKET_SHARE_PCT      = 0.05    # 5% market share by year end
-    IDEAL_LOAD_FACTOR            = 0.75    # 75% full ideally
     FARE_LOAD_FACTOR             = 0.30    # 30% load assumed for fare calculation
     # Maintenance and fleet parameters
     MAINTENANCE_AFTER_HOURS      = 200
     MAINTENANCE_DURATION_DAYS    = 1.5
     MAX_MAINTENANCE_SIMULTANEOUS = 3
-    NUM_HUBS                     = 4
-    HUB_GATES                    = 11
-    MAX_NON_HUB_GATES            = 5
 
     # Template date range — the scheduler generates flights for this window.
     # All flight queries should scope to this range to handle stale DB volumes.

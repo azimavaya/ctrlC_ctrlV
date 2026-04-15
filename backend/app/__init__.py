@@ -107,7 +107,6 @@ def create_app():
     from .routes.airports   import airports_bp
     from .routes.aircraft   import aircraft_bp
     from .routes.flights    import flights_bp
-    from .routes.passengers import passengers_bp
     from .routes.simulation import simulation_bp
     from .routes.auth       import auth_bp
     from .routes.admin      import admin_bp
@@ -116,7 +115,6 @@ def create_app():
     app.register_blueprint(airports_bp,   url_prefix="/api/airports")
     app.register_blueprint(aircraft_bp,   url_prefix="/api/aircraft")
     app.register_blueprint(flights_bp,    url_prefix="/api/flights")
-    app.register_blueprint(passengers_bp, url_prefix="/api/passengers")
     app.register_blueprint(simulation_bp, url_prefix="/api/simulation")
     app.register_blueprint(auth_bp,       url_prefix="/api/auth")
     app.register_blueprint(admin_bp,      url_prefix="/api/admin")

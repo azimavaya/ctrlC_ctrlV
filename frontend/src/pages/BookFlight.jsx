@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
-import "./BookFlight.css";
 
 const API = "/api";
 

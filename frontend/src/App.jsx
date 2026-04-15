@@ -24,7 +24,6 @@ import MyBookings from "./pages/MyBookings";
 import AdminDashboard from "./pages/AdminDashboard";
 import Search from "./pages/Search";
 import Unauthorized from "./pages/Unauthorized";
-import "./App.css";
 
 /**
  * Shared page chrome: collapsible sidebar, main content slot, footer, and the

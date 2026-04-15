@@ -1,12 +1,10 @@
 // Sign-in page for Panther Cloud Air.
 // Features: username/password form, account lockout detection, password
-// visibility toggle, forgot-password flow (UI only), and a high-contrast
-// accessibility mode.
+// visibility toggle, and forgot-password flow (UI only).
 
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import "./Login.css";
 
 export default function Login() {
   const { login } = useAuth();
@@ -27,8 +25,6 @@ export default function Login() {
   const [showForgot, setShowForgot] = useState(false);
   const [forgotEmail, setForgotEmail] = useState("");
   const [forgotSent, setForgotSent] = useState(false);
-  // High-contrast accessibility mode
-  const [highContrast, setHighContrast] = useState(false);
 
   const usernameRef = useRef(null);
 
@@ -86,25 +82,12 @@ export default function Login() {
   };
 
   return (
-    <div className={`login-bg ${highContrast ? "login-hc" : ""}`}>
+    <div className="login-bg">
       {/* Hidden dummy inputs block browser autofill */}
       <input type="text"     style={{ display: "none" }} aria-hidden="true" />
       <input type="password" style={{ display: "none" }} aria-hidden="true" />
 
       <span className="login-trademark">Panther Cloud Air &copy; 2026</span>
-
-      {/* Accessibility toggle */}
-      <button
-        className="login-a11y-toggle"
-        onClick={() => setHighContrast(v => !v)}
-        aria-label="Toggle high contrast mode"
-        title="Toggle high contrast mode"
-      >
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ width: 20, height: 20 }}>
-          <circle cx="12" cy="12" r="10"/>
-          <path d="M12 2a10 10 0 010 20V2z" fill="currentColor"/>
-        </svg>
-      </button>
 
       <div className="login-card">
         <div className="login-logo">

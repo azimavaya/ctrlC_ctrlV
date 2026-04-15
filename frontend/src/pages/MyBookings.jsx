@@ -4,7 +4,6 @@
 
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
-import "./MyBookings.css";
 
 const API = "/api";
 

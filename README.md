@@ -113,13 +113,6 @@ make stop
 make restart
 ```
 
-### Environment variables
-Copy `.env.example` to `.env` to customize. Defaults work for local development:
-```bash
-cp .env.example .env
-```
-Key variables: `DB_PASSWORD`, `JWT_SECRET`, `ADMIN_PASSWORD`, `CORS_ORIGINS`.
-
 ---
 
 ## Project Structure
@@ -133,7 +126,6 @@ pca/
 ├── backend/           # Python Flask REST API
 │   └── app/
 │       ├── routes/       # API endpoints
-│       ├── models/       # Data models
 │       └── services/     # Timetable & simulation logic
 ├── database/
 │   ├── 00_init.sql       # Create database
@@ -144,12 +136,10 @@ pca/
 │   ├── 05_flights.sql
 │   ├── 06_simulation.sql
 │   ├── 07_bookings.sql
-│   └── 08_indexes.sql    # (run in numeric order by MariaDB)
-├── docs/
-│   ├── PCA_MASTER_REFERENCE.md  # Consolidated technical reference
-│   ├── SECURITY_COMPLIANCE.md   # Security compliance documentation
-│   ├── generate_flights.py      # Day 1 flight schedule SQL generator
-│   └── generate_routes.py       # Route + aircraft SQL generator
+│   ├── 08_indexes.sql    # (run in numeric order by MariaDB)
+│   └── scripts/                 # One-shot SQL generators (not run at startup)
+│       ├── generate_flights.py
+│       └── generate_routes.py
 ├── docker-compose.yml
 ├── Makefile
 └── README.md
@@ -207,9 +197,6 @@ make db-shell       # Open MariaDB shell
 Hashes: (SELECT username, password_hash FROM users;)
 make db-reset       # Reset database (destroys all data)
 make logs           # Follow all logs
-make timetable      # Generate Part 1 timetable
-make simulate       # Run 14-day simulation
-make report         # Print financial report
 ```
 
 ---

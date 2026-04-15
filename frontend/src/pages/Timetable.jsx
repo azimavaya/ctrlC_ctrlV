@@ -1,18 +1,9 @@
-// Full daily flight schedule with filtering and timezone support.
-// Features: origin/destination airport filters, UTC/ET/Local timezone toggle,
-// print-friendly view, and color-coded status badges.
+// Full daily flight schedule with filtering.
+// Features: origin/destination airport filters, print-friendly view, and color-coded status badges.
 
 import { useState, useEffect } from "react";
-import "./Timetable.css";
 
 const API = "/api";
-
-// Timezone options — "LOCAL" uses each airport's native timezone
-const TZ_OPTIONS = {
-  UTC:   { label: "UTC",   zone: "UTC" },
-  ET:    { label: "ET",    zone: "America/New_York" },
-  LOCAL: { label: "Local", zone: null },
-};
 
 // Hardcoded airport list for the filter dropdowns (matches the 31 PCA airports)
 const AIRPORTS = [
@@ -50,8 +41,8 @@ const AIRPORTS = [
 ];
 
 
-/** Format a departure/arrival time into the selected timezone; LOCAL mode shows UTC offset */
-function fmt(dt, tz, airportTz) {
+/** Format a departure/arrival time in UTC */
+function fmt(dt) {
   if (!dt) return "—";
   const d = new Date(dt + (dt.endsWith("Z") ? "" : "Z"));
   const now = new Date();
@@ -59,53 +50,21 @@ function fmt(dt, tz, airportTz) {
     now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),
     d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds()
   ));
-  const zone = tz === "LOCAL" && airportTz ? airportTz : (TZ_OPTIONS[tz]?.zone ?? "UTC");
-  const time = today.toLocaleTimeString("en-US", {
+  return today.toLocaleTimeString("en-US", {
     hour: "2-digit", minute: "2-digit", hour12: true,
-    timeZone: zone,
+    timeZone: "UTC",
   });
-  if (tz === "LOCAL" && airportTz) {
-    // Compute UTC offset for this timezone
-    const utcStr = today.toLocaleString("en-US", { timeZone: "UTC" });
-    const localStr = today.toLocaleString("en-US", { timeZone: airportTz });
-    const offMin = (new Date(localStr) - new Date(utcStr)) / 60000;
-    const sign = offMin >= 0 ? "+" : "";
-    const offH = offMin / 60;
-    return `${time} (UTC${sign}${offH % 1 === 0 ? offH.toFixed(0) : offH})`;
-  }
-  return time;
 }
 
-/** Calculate flight duration from departure/arrival; shows timezone offset difference if applicable */
-function fmtDuration(dep, arr, originTz, destTz) {
+/** Calculate flight duration from departure/arrival */
+function fmtDuration(dep, arr) {
   if (!dep || !arr) return "—";
   const d = new Date(dep + (dep.endsWith("Z") ? "" : "Z"));
   const a = new Date(arr + (arr.endsWith("Z") ? "" : "Z"));
   const realMin = Math.round((a - d) / 60000);
   const h = Math.floor(realMin / 60);
   const m = realMin % 60;
-  let label = `${h}h ${m}m`;
-
-  // Compute timezone offset difference (dest - origin) in hours
-  if (originTz && destTz) {
-    // Use a reference date to get UTC offsets for each timezone
-    const ref = new Date();
-    const originOff = -new Date(ref.toLocaleString("en-US", { timeZone: originTz })).getTimezoneOffset() - (-ref.getTimezoneOffset());
-    const destOff = -new Date(ref.toLocaleString("en-US", { timeZone: destTz })).getTimezoneOffset() - (-ref.getTimezoneOffset());
-    // Actually simpler: get offset in minutes for each tz
-    const getOffset = (tz) => {
-      const utcStr = ref.toLocaleString("en-US", { timeZone: "UTC" });
-      const tzStr = ref.toLocaleString("en-US", { timeZone: tz });
-      return (new Date(tzStr) - new Date(utcStr)) / 60000;
-    };
-    const diff = getOffset(destTz) - getOffset(originTz);
-    if (diff !== 0) {
-      const sign = diff > 0 ? "+" : "";
-      const diffH = diff / 60;
-      label += ` (${sign}${diffH}h)`;
-    }
-  }
-  return label;
+  return `${h}h ${m}m`;
 }
 
 /** Renders a color-coded pill for flight status (scheduled, boarding, departed, etc.) */
@@ -118,7 +77,6 @@ export default function Timetable() {
   const [loading, setLoading] = useState(true);
   const [originFilter, setOriginFilter] = useState("");
   const [destFilter, setDestFilter]     = useState("");
-  const [tz, setTz]                     = useState("UTC");
 
   // Fetch the full daily flight schedule on mount
   useEffect(() => {
@@ -161,17 +119,6 @@ export default function Timetable() {
             ))}
           </select>
         </div>
-        <div className="tt-tz-toggle">
-          {Object.keys(TZ_OPTIONS).map(k => (
-            <button
-              key={k}
-              className={`tt-tz-btn${tz === k ? " tt-tz-btn--active" : ""}`}
-              onClick={() => setTz(k)}
-            >
-              {TZ_OPTIONS[k].label}
-            </button>
-          ))}
-        </div>
         <div className="tt-count-badge">
           {loading ? "Loading…" : `${filtered.length} flight${filtered.length !== 1 ? "s" : ""}`}
         </div>
@@ -189,8 +136,8 @@ export default function Timetable() {
                 <th>Flight</th>
                 <th>From</th>
                 <th>To</th>
-                <th>Departs{tz !== "LOCAL" ? ` (${tz})` : ""}</th>
-                <th>Arrives{tz !== "LOCAL" ? ` (${tz})` : ""}</th>
+                <th>Departs (UTC)</th>
+                <th>Arrives (UTC)</th>
                 <th>Duration</th>
                 <th>Aircraft</th>
                 <th>Capacity</th>
@@ -214,9 +161,9 @@ export default function Timetable() {
                     <span className="tt-iata">{f.dest_iata}</span>
                     <span className="tt-city">{f.dest_city}</span>
                   </td>
-                  <td className="tt-time">{fmt(f.scheduled_departure, tz, f.origin_tz)}</td>
-                  <td className="tt-time">{fmt(f.scheduled_arrival, tz, f.dest_tz)}</td>
-                  <td className="tt-duration">{fmtDuration(f.scheduled_departure, f.scheduled_arrival, f.origin_tz, f.dest_tz)}</td>
+                  <td className="tt-time">{fmt(f.scheduled_departure)}</td>
+                  <td className="tt-time">{fmt(f.scheduled_arrival)}</td>
+                  <td className="tt-duration">{fmtDuration(f.scheduled_departure, f.scheduled_arrival)}</td>
                   <td className="tt-model">{f.aircraft_model}</td>
                   <td>{f.capacity ?? "—"}</td>
                   <td>${parseFloat(f.fare_USD).toFixed(2)}</td>
