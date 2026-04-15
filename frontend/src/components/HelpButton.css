@@ -108,11 +108,3 @@
 .help-section li {
   margin-bottom: 0.4rem;
 }
-
-/* Responsive */
-@media (max-width: 480px) {
-  .help-panel {
-    width: calc(100vw - 2rem);
-    right: -0.5rem;
-  }
-}

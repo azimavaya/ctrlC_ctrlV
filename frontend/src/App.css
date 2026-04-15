@@ -14,11 +14,6 @@
 .layout-body--closed { margin-left: 64px; }
 .layout-body--open   { margin-left: 240px; }
 
-@media (max-width: 768px) {
-  .layout-body--closed,
-  .layout-body--open { margin-left: 64px; }
-}
-
 .main-content {
   flex: 1;
   max-width: 1200px;

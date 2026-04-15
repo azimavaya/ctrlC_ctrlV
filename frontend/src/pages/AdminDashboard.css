@@ -184,9 +184,6 @@
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
 }
-@media (max-width: 800px) {
-  .ad-live-tables { grid-template-columns: 1fr; }
-}
 .ad-live-section h4 {
   font-size: 0.85rem;
   text-transform: uppercase;

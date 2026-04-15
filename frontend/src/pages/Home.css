@@ -155,9 +155,6 @@
   gap: 1rem;
   margin-bottom: 1.5rem;
 }
-@media (max-width: 800px) {
-  .home-live-tables { grid-template-columns: 1fr; }
-}
 .home-live-card { padding: 0; overflow: hidden; }
 .home-live-card-hdr {
   display: flex;
@@ -261,16 +258,6 @@
 .home-card-icon { font-size: 1.5rem; margin-bottom: 0.2rem; }
 .home-card h3   { font-size: 1rem; color: var(--pca-blue); font-weight: 700; }
 .home-card p    { font-size: 0.85rem; color: var(--pca-gray); line-height: 1.5; }
-
-@media (max-width: 800px) {
-  .home-hero { flex-direction: column; }
-  .home-hero-right { width: 100%; }
-  .home-clock-block { padding: 1rem; }
-  .home-live-strip { flex-wrap: wrap; justify-content: center; }
-  .home-live-divider { display: none; }
-  .home-live-item { min-width: 70px; padding: 0.5rem 0.8rem; }
-  .home-cards { flex-wrap: wrap; }
-}
 
 /* Info Panel Modal */
 .info-overlay {

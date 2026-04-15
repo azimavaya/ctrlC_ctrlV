@@ -95,10 +95,7 @@ export default function Sidebar({ open, onToggle }) {
   ].filter(item => !item.roles || item.roles.includes(user?.role));
 
   return (
-    <>
-      {open && <div className="sidebar-backdrop" onClick={onToggle} />}
-
-      <aside className={`sidebar ${open ? "sidebar--open" : "sidebar--closed"}`}>
+    <aside className={`sidebar ${open ? "sidebar--open" : "sidebar--closed"}`}>
 
         <button className="sidebar-toggle" onClick={onToggle} aria-label="Toggle sidebar">
           {open ? <IconClose /> : <IconMenu />}
@@ -113,7 +110,6 @@ export default function Sidebar({ open, onToggle }) {
               className={({ isActive }) =>
                 `sidebar-item ${isActive ? "sidebar-item--active" : ""}`
               }
-              onClick={() => { if (open && window.innerWidth < 768) onToggle(); }}
             >
               <span className="sidebar-icon"><Icon /></span>
               {open && <span className="sidebar-label">{label}</span>}
@@ -143,7 +139,6 @@ export default function Sidebar({ open, onToggle }) {
             <IconLogout />
           </button>
         </div>
-      </aside>
-    </>
+    </aside>
   );
 }
