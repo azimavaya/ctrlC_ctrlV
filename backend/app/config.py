@@ -1,5 +1,5 @@
 # Configuration for the PCA Flask app. All values come from env vars
-# with dev defaults. Business constants are from the CSC 4710 project spec.
+
 
 import os
 
