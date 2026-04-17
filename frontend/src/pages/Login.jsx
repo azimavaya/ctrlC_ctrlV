@@ -57,10 +57,12 @@ export default function Login() {
   /** Submit credentials to the auth API; handle lockout and errors */
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // Prevent empty username or password
     if (!username.trim() || !password) return;
     setError(null);
     setLoading(true);
     try {
+      // Login is defined in AuthContext.jsx
       await login(username.trim(), password);
       navigate("/", { replace: true });
     } catch (err) {
