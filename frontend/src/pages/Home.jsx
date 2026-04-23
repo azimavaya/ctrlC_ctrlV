@@ -1,8 +1,27 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 const API = "/api";
+
+function useCountUp(target, duration = 1200) {
+  const [value, setValue] = useState(0);
+  const prev = useRef(null);
+  useEffect(() => {
+    if (target == null || target === prev.current) return;
+    prev.current = target;
+    const start = performance.now();
+    const from = 0;
+    const step = (now) => {
+      const t = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - t, 3);
+      setValue(Math.round(from + (target - from) * eased));
+      if (t < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }, [target, duration]);
+  return value;
+}
 
 function todayLabel() {
   return new Date().toLocaleDateString("en-US", {
@@ -27,6 +46,11 @@ function fmt(dt) {
 export default function Home() {
   const { user } = useAuth();
   const [live, setLive]             = useState(null);
+
+  const animTotal     = useCountUp(live?.total_today);
+  const animInAir     = useCountUp(live?.in_air);
+  const animCompleted = useCountUp(live?.completed);
+  const animRemaining = useCountUp(live?.remaining);
 
   const loadLive = () => {
     fetch(`${API}/flights/live-stats`)
@@ -58,22 +82,22 @@ export default function Home() {
           {live ? (
             <div className="home-live-strip">
               <div className="home-live-item">
-                <span className="home-live-val home-live-total">{live.total_today}</span>
+                <span className="home-live-val home-live-total">{animTotal}</span>
                 <span className="home-live-lbl">Flights Today</span>
               </div>
               <div className="home-live-divider" />
               <div className="home-live-item">
-                <span className="home-live-val home-live-air">{live.in_air}</span>
+                <span className="home-live-val home-live-air">{animInAir}</span>
                 <span className="home-live-lbl">In the Air</span>
               </div>
               <div className="home-live-divider" />
               <div className="home-live-item">
-                <span className="home-live-val home-live-done">{live.completed}</span>
+                <span className="home-live-val home-live-done">{animCompleted}</span>
                 <span className="home-live-lbl">Completed</span>
               </div>
               <div className="home-live-divider" />
               <div className="home-live-item">
-                <span className="home-live-val home-live-left">{live.remaining}</span>
+                <span className="home-live-val home-live-left">{animRemaining}</span>
                 <span className="home-live-lbl">Remaining</span>
               </div>
             </div>

@@ -1,5 +1,39 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useAuth } from "../context/AuthContext";
+
+function Confetti() {
+  const colors = ["#c9a84c", "#1a3a5c", "#10b981", "#3b82f6", "#ef4444", "#f59e0b", "#8b5cf6"];
+  const pieces = Array.from({ length: 60 }, (_, i) => ({
+    id: i,
+    left: Math.random() * 100,
+    delay: Math.random() * 0.6,
+    duration: 1.5 + Math.random() * 1.5,
+    color: colors[i % colors.length],
+    rotation: Math.random() * 360,
+    size: 6 + Math.random() * 6,
+    drift: -30 + Math.random() * 60,
+  }));
+  return (
+    <div className="confetti-container" aria-hidden="true">
+      {pieces.map(p => (
+        <div
+          key={p.id}
+          className="confetti-piece"
+          style={{
+            left: `${p.left}%`,
+            animationDelay: `${p.delay}s`,
+            animationDuration: `${p.duration}s`,
+            backgroundColor: p.color,
+            width: `${p.size}px`,
+            height: `${p.size * 0.6}px`,
+            transform: `rotate(${p.rotation}deg)`,
+            "--drift": `${p.drift}px`,
+          }}
+        />
+      ))}
+    </div>
+  );
+}
 
 const API = "/api";
 
@@ -454,6 +488,7 @@ export default function BookFlight() {
       {/* STEP 3: Confirmation */}
       {step === 3 && booking && (
         <div className="card confirmation-card">
+          <Confetti />
           <div className="confirm-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />

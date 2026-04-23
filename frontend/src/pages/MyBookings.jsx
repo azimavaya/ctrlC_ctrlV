@@ -64,69 +64,68 @@ export default function MyBookings() {
       {!loading && bookings.length > 0 && (
         <div className="bookings-list">
           {bookings.map(b => (
-            <div className="card booking-card" key={b.booking_id}>
-              <div className="booking-card-header">
-                <div className="booking-ref-block">
-                  <span className="booking-ref-label">Booking Ref</span>
-                  <span className="booking-ref">{b.booking_ref}</span>
+            <div className="boarding-pass" key={b.booking_id}>
+              <div className="bp-main">
+                <div className="bp-airline">
+                  <span className="bp-airline-icon">✈</span>
+                  <span className="bp-airline-name">Panther Cloud Air</span>
                 </div>
-                <span className="booking-cabin cabin-eco">Economy</span>
-              </div>
-
-              <div className="booking-card-route">
-                <div className="booking-route-point">
-                  <span className="booking-iata">{b.origin_iata}</span>
-                  <span className="booking-city">{b.origin_city}</span>
-                </div>
-                <div className="booking-route-arrow">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ width: 24, height: 24 }}>
-                    <line x1="5" y1="12" x2="19" y2="12" />
-                    <polyline points="12 5 19 12 12 19" />
-                  </svg>
-                </div>
-                <div className="booking-route-point">
-                  <span className="booking-iata">{b.dest_iata}</span>
-                  <span className="booking-city">{b.dest_city}</span>
-                </div>
-              </div>
-
-              <div className="booking-card-details">
-                <div className="booking-detail">
-                  <span className="detail-label">Flight</span>
-                  <span className="detail-value">{b.flight_number}</span>
-                </div>
-                <div className="booking-detail">
-                  <span className="detail-label">Date</span>
-                  <span className="detail-value">{fmtDate(b.scheduled_departure)}</span>
-                </div>
-                <div className="booking-detail">
-                  <span className="detail-label">Departure</span>
-                  <span className="detail-value">{fmtTime(b.scheduled_departure)}</span>
-                </div>
-                <div className="booking-detail">
-                  <span className="detail-label">Arrival</span>
-                  <span className="detail-value">{fmtTime(b.scheduled_arrival)}</span>
-                </div>
-                <div className="booking-detail">
-                  <span className="detail-label">Passenger</span>
-                  <span className="detail-value">{b.passenger_name}</span>
-                </div>
-                <div className="booking-detail">
-                  <span className="detail-label">Total Fare</span>
-                  <span className="detail-value detail-fare">${parseFloat(b.total_fare_usd).toFixed(2)}</span>
-                </div>
-                {isAdmin && b.username && (
-                  <div className="booking-detail">
-                    <span className="detail-label">Booked By</span>
-                    <span className="detail-value">{b.username}</span>
+                <div className="bp-route">
+                  <div className="bp-point">
+                    <span className="bp-iata">{b.origin_iata}</span>
+                    <span className="bp-city">{b.origin_city}</span>
+                    <span className="bp-time">{fmtTime(b.scheduled_departure)}</span>
                   </div>
-                )}
+                  <div className="bp-flight-line">
+                    <div className="bp-line-track" />
+                    <svg className="bp-plane-icon" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                      <path d="M21 16v-2l-8-5V3.5A1.5 1.5 0 0011.5 2 1.5 1.5 0 0010 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+                    </svg>
+                    <span className="bp-flight-num">{b.flight_number}</span>
+                  </div>
+                  <div className="bp-point">
+                    <span className="bp-iata">{b.dest_iata}</span>
+                    <span className="bp-city">{b.dest_city}</span>
+                    <span className="bp-time">{fmtTime(b.scheduled_arrival)}</span>
+                  </div>
+                </div>
+                <div className="bp-details">
+                  <div className="bp-detail">
+                    <span className="bp-detail-label">Passenger</span>
+                    <span className="bp-detail-value">{b.passenger_name}</span>
+                  </div>
+                  <div className="bp-detail">
+                    <span className="bp-detail-label">Date</span>
+                    <span className="bp-detail-value">{fmtDate(b.scheduled_departure)}</span>
+                  </div>
+                  <div className="bp-detail">
+                    <span className="bp-detail-label">Class</span>
+                    <span className="bp-detail-value">Economy</span>
+                  </div>
+                  <div className="bp-detail">
+                    <span className="bp-detail-label">Fare</span>
+                    <span className="bp-detail-value bp-fare">${parseFloat(b.total_fare_usd).toFixed(2)}</span>
+                  </div>
+                  {isAdmin && b.username && (
+                    <div className="bp-detail">
+                      <span className="bp-detail-label">Booked By</span>
+                      <span className="bp-detail-value">{b.username}</span>
+                    </div>
+                  )}
+                </div>
               </div>
-
-              <div className="booking-card-footer">
-                <span className="booking-date">Booked {fmtDate(b.created_at)}</span>
+              <div className="bp-tear" />
+              <div className="bp-stub">
+                <span className="bp-stub-ref-label">Booking Ref</span>
+                <span className="bp-stub-ref">{b.booking_ref}</span>
+                <div className="bp-barcode">
+                  {Array.from({ length: 20 }, (_, i) => (
+                    <div key={i} className="bp-bar" style={{ height: `${14 + Math.random() * 16}px`, width: Math.random() > 0.5 ? "3px" : "2px" }} />
+                  ))}
+                </div>
+                <span className="bp-stub-route">{b.origin_iata} → {b.dest_iata}</span>
                 {isAdmin && (
-                  <button className="btn-delete-booking" onClick={() => handleDelete(b.booking_id)}>
+                  <button className="btn-delete-booking" onClick={() => handleDelete(b.booking_id)} style={{ marginTop: "0.5rem" }}>
                     Delete
                   </button>
                 )}
