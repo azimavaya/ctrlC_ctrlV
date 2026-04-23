@@ -10,6 +10,8 @@
 
 import { useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
+import { ThemeProvider } from "./context/ThemeContext";
+import ThemeToggle from "./components/ThemeToggle";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Sidebar from "./components/Sidebar";
@@ -42,6 +44,7 @@ function Layout({ children }) {
           <p>Panther Cloud Air &copy; 2026</p>
         </footer>
       </div>
+      <ThemeToggle className="theme-toggle--layout" />
       <HelpButton />
     </div>
   );
@@ -57,8 +60,9 @@ function Layout({ children }) {
  */
 export default function App() {
   return (
-    <AuthProvider>
-      <Routes>
+    <ThemeProvider>
+      <AuthProvider>
+        <Routes>
         {/* Public entry point */}
         <Route path="/login" element={<Login />} />
 
@@ -114,8 +118,9 @@ export default function App() {
 
         {/* Unknown URL → bounce home. Home is protected, so logged-out
             users continue on to /login automatically. */}
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </AuthProvider>
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </AuthProvider>
+    </ThemeProvider>
   );
 }

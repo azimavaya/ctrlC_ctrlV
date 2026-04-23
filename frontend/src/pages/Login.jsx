@@ -5,6 +5,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import ThemeToggle from "../components/ThemeToggle";
 
 export default function Login() {
   const { login } = useAuth();
@@ -85,6 +86,7 @@ export default function Login() {
 
   return (
     <div className="login-bg">
+      <ThemeToggle className="theme-toggle--login" />
       {/* Hidden dummy inputs block browser autofill */}
       <input type="text"     style={{ display: "none" }} aria-hidden="true" />
       <input type="password" style={{ display: "none" }} aria-hidden="true" />
