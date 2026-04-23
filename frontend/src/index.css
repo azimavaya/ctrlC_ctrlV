@@ -414,6 +414,45 @@ button {
   margin-bottom: 0.4rem;
 }
 
+/* ---------- ThemeToggle ---------- */
+.theme-toggle {
+  background: none;
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: rgba(255,255,255,0.8);
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.theme-toggle:hover {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+}
+
+.theme-toggle--login {
+  position: fixed;
+  top: 1rem;
+  right: 1.25rem;
+  z-index: 10;
+}
+
+.theme-toggle--layout {
+  position: fixed;
+  top: 1rem;
+  right: 4.5rem;
+  z-index: 101;
+  color: var(--pca-gray);
+  border-color: var(--pca-border);
+}
+.theme-toggle--layout:hover {
+  background: var(--pca-border);
+  color: var(--pca-blue);
+}
+
 /* ---------- Login page ---------- */
 /* Full-screen gradient background */
 .login-bg {
@@ -1785,3 +1824,185 @@ button {
   margin-top: 0.5rem;
   font-size: 0.85rem;
 }
+
+/* ---------- Dark theme overrides ---------- */
+[data-theme="dark"] {
+  --pca-blue:    #5b9bd5;
+  --pca-gold:    #d4a843;
+  --pca-light:   #121820;
+  --pca-white:   #1a2332;
+  --pca-gray:    #9ca3af;
+  --pca-border:  #2d3748;
+  --pca-text:    #e2e8f0;
+  --pca-text-secondary: #9ca3af;
+}
+
+[data-theme="dark"] body {
+  background: #0f1419;
+  color: #e2e8f0;
+}
+
+[data-theme="dark"] a { color: #5b9bd5; }
+
+/* Sidebar — already dark, just soften borders */
+[data-theme="dark"] .sidebar {
+  background: #0a1628;
+  box-shadow: 2px 0 12px rgba(0,0,0,0.5);
+}
+
+/* Cards and panels */
+[data-theme="dark"] .card,
+[data-theme="dark"] .home-card,
+[data-theme="dark"] .flight-card,
+[data-theme="dark"] .booking-card,
+[data-theme="dark"] .sim-control-card,
+[data-theme="dark"] .sim-results-card,
+[data-theme="dark"] .fin-section,
+[data-theme="dark"] .fin-dst-panel,
+[data-theme="dark"] .help-panel {
+  background: #1a2332;
+  border-color: #2d3748;
+}
+
+/* Footer */
+[data-theme="dark"] .footer {
+  background: #0a1628;
+}
+
+/* Tables — header and hover rows */
+[data-theme="dark"] .pca-table th {
+  background: #1e3a5f;
+}
+[data-theme="dark"] .pca-table tr:hover td { background: #1e2a3a; }
+[data-theme="dark"] .home-live-tbl thead th,
+[data-theme="dark"] .tt-table thead th,
+[data-theme="dark"] .sim-results-table thead th,
+[data-theme="dark"] .fin-table thead th {
+  background: #1a2332;
+  color: #9ca3af;
+  border-bottom-color: #2d3748;
+}
+[data-theme="dark"] .home-live-tbl td,
+[data-theme="dark"] .tt-table td,
+[data-theme="dark"] .sim-results-table td,
+[data-theme="dark"] .fin-table td {
+  border-bottom-color: #2d3748;
+}
+[data-theme="dark"] .home-live-tbl tbody tr:hover td,
+[data-theme="dark"] .tt-table tbody tr:hover td,
+[data-theme="dark"] .sim-results-table tbody tr:hover td,
+[data-theme="dark"] .fin-table tbody tr:hover td {
+  background: #1e2a3a;
+}
+[data-theme="dark"] .tt-table tbody tr:nth-child(even) td { background: #161e2a; }
+
+/* Home hero — keep the gradient but darken */
+[data-theme="dark"] .home-hero {
+  background: linear-gradient(135deg, #0a1628 0%, #132a45 60%, #1a3a5c);
+}
+
+/* Home live card headers */
+[data-theme="dark"] .home-live-card-hdr { background: #1e3a5f; }
+[data-theme="dark"] .home-live-card-hdr--done { background: #064e3b; }
+
+/* Form inputs */
+[data-theme="dark"] .form-group input,
+[data-theme="dark"] .form-group select,
+[data-theme="dark"] .ad-create-fields input,
+[data-theme="dark"] .ad-create-fields select,
+[data-theme="dark"] .fin-currency-pick select {
+  background: #0f1419;
+  color: #e2e8f0;
+  border-color: #2d3748;
+}
+[data-theme="dark"] .form-group input:focus {
+  border-color: #5b9bd5;
+  box-shadow: 0 0 0 3px rgba(91, 155, 213, 0.15);
+}
+
+/* Login page */
+[data-theme="dark"] .login-bg {
+  background: linear-gradient(135deg, #0a0f18 0%, #0f1e33 60%, #152a4a 100%);
+}
+[data-theme="dark"] .login-card {
+  background: #1a2332;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+[data-theme="dark"] .login-logo h1 { color: #5b9bd5; }
+[data-theme="dark"] .login-form .form-group label { color: #cbd5e1; }
+[data-theme="dark"] .login-form .form-group input {
+  background: #0f1419;
+  color: #e2e8f0;
+  border-color: #2d3748;
+}
+[data-theme="dark"] .login-form .form-group input:focus {
+  border-color: #5b9bd5;
+  box-shadow: 0 0 0 3px rgba(91,155,213,0.15);
+}
+[data-theme="dark"] .login-ready-text { color: #cbd5e1; }
+[data-theme="dark"] .login-progress-track { background: #2d3748; }
+
+/* Buttons — primary keeps its identity, secondary adapts */
+[data-theme="dark"] .btn-primary { background: #1e3a5f; }
+[data-theme="dark"] .btn-primary:hover { background: #254a75; }
+[data-theme="dark"] .btn-secondary {
+  background: #1a2332;
+  color: #5b9bd5;
+  border-color: #2d3748;
+}
+[data-theme="dark"] .btn-secondary:hover { background: #2d3748; }
+
+/* Admin dashboard */
+[data-theme="dark"] .ad-stat-card { background: #1a2332; }
+[data-theme="dark"] .ad-tab { color: #9ca3af; }
+[data-theme="dark"] .ad-tab:hover { color: #5b9bd5; }
+[data-theme="dark"] .ad-tab--active { color: #5b9bd5; border-bottom-color: #5b9bd5; }
+[data-theme="dark"] .ad-create-form { background: #0f1419; border-color: #2d3748; }
+
+/* Simulation stat cards */
+[data-theme="dark"] .sim-stat { background: #1a2332; }
+[data-theme="dark"] .sim-status-chip { background: #1a2332; border-color: #2d3748; }
+
+/* Finance summary cards */
+[data-theme="dark"] .fin-summary-card { background: #1a2332; }
+[data-theme="dark"] .fin-dst-item { background: #0f1419; }
+
+/* Booking card header + footer shading */
+[data-theme="dark"] .booking-card-header { background: rgba(91,155,213,0.08); }
+[data-theme="dark"] .booking-card-footer { background: rgba(91,155,213,0.04); }
+[data-theme="dark"] .booking-summary-mini { background: rgba(91,155,213,0.08); }
+
+/* Error messages */
+[data-theme="dark"] .login-error,
+[data-theme="dark"] .error-msg {
+  background: #3b1212;
+  color: #fca5a5;
+}
+
+/* Help panel */
+[data-theme="dark"] .help-panel-header {
+  border-bottom-color: #2d3748;
+}
+[data-theme="dark"] .help-panel-header h3 { color: #5b9bd5; }
+[data-theme="dark"] .help-panel-body { color: #cbd5e1; }
+[data-theme="dark"] .help-fab { background: #1e3a5f; }
+[data-theme="dark"] .help-fab:hover { background: #254a75; }
+
+/* Theme toggle adapts in dark mode */
+[data-theme="dark"] .theme-toggle--layout {
+  color: #9ca3af;
+  border-color: #2d3748;
+}
+[data-theme="dark"] .theme-toggle--layout:hover {
+  background: #2d3748;
+  color: #e2e8f0;
+}
+
+/* Step indicator (book flight) */
+[data-theme="dark"] .step-line { background: #2d3748; }
+
+/* Search page */
+[data-theme="dark"] .no-results { color: #9ca3af; }
+
+/* Loading screen */
+[data-theme="dark"] .loading-screen { color: #9ca3af; }
