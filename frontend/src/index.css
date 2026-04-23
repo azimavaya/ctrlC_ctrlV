@@ -1899,7 +1899,17 @@ button {
 /* Home hero — keep the gradient but darken */
 [data-theme="dark"] .home-hero {
   background: linear-gradient(135deg, #0a1628 0%, #132a45 60%, #1a3a5c);
+  color: #fff;
 }
+[data-theme="dark"] .home-title,
+[data-theme="dark"] .home-subtitle,
+[data-theme="dark"] .home-tagline { color: rgba(255,255,255,0.9); }
+[data-theme="dark"] .home-clock-label,
+[data-theme="dark"] .home-clock-date { color: rgba(255,255,255,0.7); }
+[data-theme="dark"] .home-live-lbl { color: rgba(255,255,255,0.7); opacity: 1; }
+[data-theme="dark"] .home-fn { color: #5b9bd5; }
+[data-theme="dark"] .home-time { color: #e2e8f0; }
+[data-theme="dark"] .home-aircraft { color: #9ca3af; }
 
 /* Home live card headers */
 [data-theme="dark"] .home-live-card-hdr { background: #1e3a5f; }
