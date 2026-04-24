@@ -96,7 +96,7 @@ export default function MyBookings() {
                   </div>
                   <div className="bp-detail">
                     <span className="bp-detail-label">Date</span>
-                    <span className="bp-detail-value">{fmtDate(b.scheduled_departure)}</span>
+                    <span className="bp-detail-value">{b.travel_date ? fmtDate(b.travel_date + "T12:00:00") : fmtDate(b.scheduled_departure)}</span>
                   </div>
                   <div className="bp-detail">
                     <span className="bp-detail-label">Class</span>

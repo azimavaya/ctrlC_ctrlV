@@ -154,6 +154,7 @@ export default function BookFlight() {
           flight_id: selectedFlight.flight_id,
           flight_id_leg2: selectedFlight.flight_id_leg2,
           flight_id_leg3: selectedFlight.flight_id_leg3 || null,
+          travel_date: form.date,
           passenger_name: passenger.name,
           passenger_email: passenger.email,
           passenger_phone: passenger.phone,
@@ -410,7 +411,7 @@ export default function BookFlight() {
               {selectedFlight.summary.origin} → {selectedFlight.summary.destination}
             </p>
             <p>
-              {fmtDate(selectedFlight.summary.departure)} &nbsp;·&nbsp;
+              {fmtDate(form.date + "T12:00:00")} &nbsp;·&nbsp;
               {fmtTime(selectedFlight.summary.departure)} – {fmtTime(selectedFlight.summary.arrival)}
               &nbsp;·&nbsp; {fmtDuration(selectedFlight.summary.duration_min)}
             </p>
@@ -516,7 +517,7 @@ export default function BookFlight() {
             </div>
             <div className="confirm-row">
               <span>Date</span>
-              <span>{fmtDate(selectedFlight.summary.departure)}</span>
+              <span>{fmtDate(form.date + "T12:00:00")}</span>
             </div>
             <div className="confirm-row">
               <span>Time</span>

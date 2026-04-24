@@ -3,7 +3,7 @@
 # appears to repeat daily. Live stats map wall-clock time onto that date.
 
 import re
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from flask import Blueprint, jsonify, request
 from ..db import get_db
 from ..config import Config
@@ -214,8 +214,15 @@ def live_stats():
     now = datetime.now(timezone.utc)
     today = now.strftime("%Y-%m-%d")
 
-    # Map current time-of-day onto the template date so the schedule loops daily
-    template_now = datetime(2026, 3, 9, now.hour, now.minute, now.second)
+    # Map current time-of-day onto the template date so the schedule loops daily.
+    # Flights operate ~09:00 UTC to ~07:00 UTC next day (US morning → night),
+    # so the operating day starts at 09:00 UTC, not midnight.
+    OP_START = 9
+    if now.hour >= OP_START:
+        elapsed = timedelta(hours=now.hour - OP_START, minutes=now.minute, seconds=now.second)
+    else:
+        elapsed = timedelta(hours=24 - OP_START + now.hour, minutes=now.minute, seconds=now.second)
+    template_now = datetime(2026, 3, 9, OP_START, 0, 0) + elapsed
     template_now_str = template_now.strftime("%Y-%m-%d %H:%M:%S")
 
     db = get_db()

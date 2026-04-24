@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS bookings (
     passenger_email   VARCHAR(254)   NOT NULL,
     passenger_phone   VARCHAR(20)    NOT NULL,
     passenger_address TEXT           NOT NULL,
+    travel_date       DATE           NOT NULL,
     booking_ref       VARCHAR(6)     NOT NULL UNIQUE,
     created_at        DATETIME       NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id)        REFERENCES users(user_id),

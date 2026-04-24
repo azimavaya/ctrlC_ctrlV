@@ -213,6 +213,9 @@ def create_booking():
     flight_id = data["flight_id"]
     flight_id_leg2 = data.get("flight_id_leg2")
     flight_id_leg3 = data.get("flight_id_leg3")
+    travel_date = data.get("travel_date")
+    if not travel_date:
+        return jsonify({"error": "travel_date is required"}), 400
     user_id = request.current_user["user_id"]
 
     db = get_db()
@@ -243,12 +246,12 @@ def create_booking():
     cursor.execute("""
         INSERT INTO bookings
             (user_id, flight_id, flight_id_leg2, flight_id_leg3, cabin_class, total_fare_usd,
-             passenger_name, passenger_email, passenger_phone, passenger_address, booking_ref)
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+             passenger_name, passenger_email, passenger_phone, passenger_address, travel_date, booking_ref)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
     """, (
         user_id, flight_id, flight_id_leg2, flight_id_leg3, "economy", total_fare,
         data["passenger_name"], data["passenger_email"],
-        data["passenger_phone"], data["passenger_address"], ref
+        data["passenger_phone"], data["passenger_address"], travel_date, ref
     ))
     db.commit()
     cursor.close()
