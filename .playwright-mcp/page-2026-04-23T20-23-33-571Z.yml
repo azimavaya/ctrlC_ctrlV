@@ -1,0 +1,22 @@
+- generic [ref=e3]:
+  - button "Switch to light mode" [active] [ref=e30] [cursor=pointer]:
+    - img [ref=e31]
+  - generic: Panther Cloud Air © 2026
+  - generic [ref=e7]:
+    - generic [ref=e8]:
+      - generic [ref=e9]: ✈
+      - heading "Panther Cloud Air" [level=1] [ref=e10]
+    - generic [ref=e16]:
+      - generic [ref=e17]:
+        - generic [ref=e18]: Username or Email
+        - textbox "Username or Email" [ref=e19]:
+          - /placeholder: Enter your username or email
+      - generic [ref=e20]:
+        - generic [ref=e21]: Password
+        - generic [ref=e22]:
+          - textbox "Password" [ref=e23]:
+            - /placeholder: Enter your password
+          - button "Show password" [ref=e24] [cursor=pointer]:
+            - img [ref=e25]
+      - button "Sign In" [disabled] [ref=e28]
+      - button "Forgot password?" [ref=e29] [cursor=pointer]

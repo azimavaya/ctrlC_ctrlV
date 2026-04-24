@@ -1,0 +1,69 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - button "Toggle sidebar" [ref=e5] [cursor=pointer]:
+      - img [ref=e6]
+    - navigation [ref=e10]:
+      - link [ref=e11] [cursor=pointer]:
+        - /url: /
+        - img [ref=e13]
+      - link [ref=e16] [cursor=pointer]:
+        - /url: /book
+        - img [ref=e18]
+      - link [ref=e21] [cursor=pointer]:
+        - /url: /bookings
+        - img [ref=e23]
+      - link [ref=e26] [cursor=pointer]:
+        - /url: /timetable
+        - img [ref=e28]
+      - link [ref=e33] [cursor=pointer]:
+        - /url: /simulation
+        - img [ref=e35]
+      - link [ref=e39] [cursor=pointer]:
+        - /url: /finances
+        - img [ref=e41]
+      - link [ref=e44] [cursor=pointer]:
+        - /url: /admin
+        - img [ref=e46]
+    - generic [ref=e48]:
+      - generic [ref=e49]: AD
+      - button "Sign out" [ref=e50] [cursor=pointer]:
+        - img [ref=e51]
+  - generic [ref=e55]:
+    - main [ref=e56]:
+      - generic [ref=e57]:
+        - generic [ref=e58]:
+          - generic [ref=e59]:
+            - generic [ref=e60]: Operations Active
+            - heading "Panther Cloud Air" [level=1] [ref=e61]
+            - paragraph [ref=e62]: Thursday, April 23, 2026
+            - paragraph [ref=e63]: 31 airports · 56 aircraft · 4 hubs
+          - generic [ref=e65]:
+            - generic [ref=e66]: Flights Today
+            - generic [ref=e67]: —
+            - generic [ref=e68]: loading…
+        - generic [ref=e69]:
+          - link "✈ Book Flight Search available routes, compare fares, and book your flight." [ref=e70] [cursor=pointer]:
+            - /url: /book
+            - generic [ref=e71]: ✈
+            - heading "Book Flight" [level=3] [ref=e72]
+            - paragraph [ref=e73]: Search available routes, compare fares, and book your flight.
+          - link "🎫 My Bookings View and manage your flight reservations." [ref=e74] [cursor=pointer]:
+            - /url: /bookings
+            - generic [ref=e75]: 🎫
+            - heading "My Bookings" [level=3] [ref=e76]
+            - paragraph [ref=e77]: View and manage your flight reservations.
+          - link "🗓 Timetable View the complete schedule for all routes and airports." [ref=e78] [cursor=pointer]:
+            - /url: /timetable
+            - generic [ref=e79]: 🗓
+            - heading "Timetable" [level=3] [ref=e80]
+            - paragraph [ref=e81]: View the complete schedule for all routes and airports.
+          - link "⚙ Admin Dashboard Manage users, fleet, and system settings." [ref=e82] [cursor=pointer]:
+            - /url: /admin
+            - generic [ref=e83]: ⚙
+            - heading "Admin Dashboard" [level=3] [ref=e84]
+            - paragraph [ref=e85]: Manage users, fleet, and system settings.
+    - contentinfo [ref=e86]:
+      - paragraph [ref=e87]: Panther Cloud Air © 2026
+  - button "Switch to light mode" [ref=e88] [cursor=pointer]:
+    - img [ref=e89]
+  - button "Toggle help" [ref=e100] [cursor=pointer]: "?"
